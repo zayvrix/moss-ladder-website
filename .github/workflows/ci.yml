@@ -1,0 +1,41 @@
+name: CI / Build & Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Typecheck, Test & Static Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Astro Template & Type Diagnostics
+        run: npm run check
+
+      - name: Run Vitest Unit Test Suite
+        run: npm run test
+
+      - name: Run Production Static Build
+        run: npm run build
+        env:
+          SITE_URL: https://moss-ladder.pages.dev
