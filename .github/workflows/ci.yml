@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   verify:
-    name: Typecheck, Test & Static Build
+    name: Typecheck, Build & Test
     runs-on: ubuntu-latest
 
     steps:
@@ -32,10 +32,10 @@ jobs:
       - name: Run Astro Template & Type Diagnostics
         run: npm run check
 
-      - name: Run Vitest Unit Test Suite
-        run: npm run test
-
       - name: Run Production Static Build
         run: npm run build
         env:
           SITE_URL: https://moss-ladder.pages.dev
+
+      - name: Run Vitest Unit Test Suite
+        run: npm run test
