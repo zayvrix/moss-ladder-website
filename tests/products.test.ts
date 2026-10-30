@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { 
   getAllProducts, 
   getProductBySlug, 
-  getFeaturedProducts, 
   getPopulatedCategories, 
   getProductsByCategory,
   getRelatedProducts,
@@ -58,7 +57,6 @@ describe('Product Catalog & Data Models', () => {
     }
 
     // Categories with 0 products should not be in populated categories
-    const allCatIds = categories.map((c) => c.id);
     const populatedIds = populated.map((c) => c.id);
     const emptyCats = categories.filter((c) => getProductsByCategory(c.id).length === 0);
     for (const empty of emptyCats) {

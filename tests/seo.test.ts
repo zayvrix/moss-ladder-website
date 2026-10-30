@@ -3,7 +3,6 @@ import {
   formatPageTitle, 
   generateCanonical, 
   generateOrganizationSchema, 
-  generateWebSiteSchema, 
   generateBreadcrumbSchema,
   generateProductSchema 
 } from '../src/utils/seo';
