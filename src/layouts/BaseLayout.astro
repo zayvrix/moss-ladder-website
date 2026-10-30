@@ -1,0 +1,109 @@
+---
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import { companyConfig } from '../config/company';
+import { 
+  formatPageTitle, 
+  generateCanonical, 
+  generateOrganizationSchema, 
+  generateWebSiteSchema 
+} from '../utils/seo';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'product';
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = companyConfig.description,
+  canonicalPath = Astro.url.pathname,
+  image = `${companyConfig.siteUrl}/brand/og-image.svg`,
+  type = 'website',
+  schema,
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = formatPageTitle(title);
+const canonicalUrl = generateCanonical(canonicalPath);
+
+// Base structured schemas
+const baseSchemas = [
+  generateOrganizationSchema(),
+  generateWebSiteSchema(),
+];
+
+const structuredData = schema 
+  ? Array.isArray(schema) 
+    ? [...baseSchemas, ...schema] 
+    : [...baseSchemas, schema]
+  : baseSchemas;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical & Basic Metadata -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow" />
+    )}
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/brand/moss-ladder-symbol.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type === 'product' ? 'website' : type} />
+    <meta property="og:site_name" content={companyConfig.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body class="flex flex-col min-h-screen bg-[#FBFBF9] text-[#121513] selection:bg-[#D8E6DB] selection:text-[#182B1D]">
+    
+    <!-- Accessibility Skip Link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#18221B] focus:text-white focus:rounded focus:outline-none focus:ring-2 focus:ring-[#5E7E66] focus:shadow-lg"
+    >
+      Skip to main content
+    </a>
+
+    <!-- Header Navigation -->
+    <Header currentPath={canonicalPath} />
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-1 focus:outline-none">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+
+  </body>
+</html>

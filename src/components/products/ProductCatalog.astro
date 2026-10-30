@@ -1,0 +1,234 @@
+---
+import type { Product, Category } from '../../types/product';
+import ProductCard from './ProductCard.astro';
+
+interface Props {
+  products: Product[];
+  categories: Category[];
+  initialCategory?: string;
+}
+
+const { products, categories, initialCategory } = Astro.props;
+---
+
+<div id="product-catalog-root" class="space-y-8" data-initial-category={initialCategory || ''}>
+  
+  <!-- Filter & Search Controls Bar -->
+  <div class="bg-white p-5 sm:p-6 rounded-xl border border-[#E5E8E3] shadow-xs space-y-4">
+    
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+      
+      <!-- Search Input (Span 5) -->
+      <div class="md:col-span-5 relative">
+        <label for="catalog-search" class="sr-only">Search products by name, description, or keyword</label>
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#717E75]">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input
+          type="search"
+          id="catalog-search"
+          placeholder="Search products by keyword..."
+          class="w-full pl-10 pr-4 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] focus:border-transparent text-[#131615] placeholder-[#7E8B81]"
+        />
+      </div>
+
+      <!-- Category Filter (Span 3) -->
+      <div class="md:col-span-3">
+        <label for="category-filter" class="sr-only">Filter by Category</label>
+        <select
+          id="category-filter"
+          class="w-full px-3 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] text-[#131615]"
+        >
+          <option value="all">All Categories</option>
+          {categories.map((c) => (
+            <option value={c.id} selected={initialCategory === c.id || initialCategory === c.slug}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Status Filter (Span 2) -->
+      <div class="md:col-span-2">
+        <label for="status-filter" class="sr-only">Filter by Status</label>
+        <select
+          id="status-filter"
+          class="w-full px-3 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] text-[#131615]"
+        >
+          <option value="all">All Statuses</option>
+          <option value="live">Live Now</option>
+          <option value="planned">Planned</option>
+          <option value="in-development">In Development</option>
+        </select>
+      </div>
+
+      <!-- Sort Filter (Span 2) -->
+      <div class="md:col-span-2">
+        <label for="sort-filter" class="sr-only">Sort by</label>
+        <select
+          id="sort-filter"
+          class="w-full px-3 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] text-[#131615]"
+        >
+          <option value="featured">Featured First</option>
+          <option value="name-asc">Alphabetical (A–Z)</option>
+          <option value="status">Status (Live First)</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Active Filters & Result Count Feedback -->
+    <div class="flex items-center justify-between text-xs text-[#5E6D62] pt-2 border-t border-[#F0F2EE]">
+      <div id="results-count" class="font-medium">
+        Showing all {products.length} products
+      </div>
+      <button
+        id="reset-filters"
+        type="button"
+        class="hidden text-[#294230] hover:text-[#131615] font-semibold underline underline-offset-2"
+      >
+        Clear filters
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Product Cards Grid -->
+  <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {products.map((product) => (
+      <ProductCard product={product} />
+    ))}
+  </div>
+
+  <!-- Empty State (Shown when search/filter returns zero matches) -->
+  <div
+    id="empty-state"
+    class="hidden bg-white rounded-xl border border-dashed border-[#CCD3CC] p-12 text-center space-y-4"
+  >
+    <div class="w-12 h-12 mx-auto rounded-full bg-[#F2F5F2] flex items-center justify-center text-[#586A5D]">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-base font-semibold text-[#131615]">No matching products found</h3>
+      <p class="text-xs text-[#627167] max-w-sm mx-auto">
+        We couldn't find any digital tools matching your current filter criteria. Try adjusting keywords or clearing filters.
+      </p>
+    </div>
+    <button
+      id="empty-reset-button"
+      type="button"
+      class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-[#243428] text-white text-xs font-medium hover:bg-[#324737] transition-colors"
+    >
+      Reset all filters
+    </button>
+  </div>
+
+</div>
+
+<script>
+  function setupCatalogFilters() {
+    const root = document.getElementById('product-catalog-root');
+    if (!root) return;
+
+    const searchInput = document.getElementById('catalog-search') as HTMLInputElement | null;
+    const categorySelect = document.getElementById('category-filter') as HTMLSelectElement | null;
+    const statusSelect = document.getElementById('status-filter') as HTMLSelectElement | null;
+    const sortSelect = document.getElementById('sort-filter') as HTMLSelectElement | null;
+    const countDisplay = document.getElementById('results-count');
+    const resetBtn = document.getElementById('reset-filters');
+    const emptyState = document.getElementById('empty-state');
+    const emptyResetBtn = document.getElementById('empty-reset-button');
+    const grid = document.getElementById('products-grid');
+
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('article')) as HTMLElement[];
+
+    function applyFilters() {
+      if (!grid) return;
+      const query = (searchInput?.value || '').toLowerCase().trim();
+      const selectedCategory = categorySelect?.value || 'all';
+      const selectedStatus = statusSelect?.value || 'all';
+      const selectedSort = sortSelect?.value || 'featured';
+
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const name = card.dataset.name || '';
+        const desc = card.dataset.description || '';
+        const tags = card.dataset.tags || '';
+        const category = card.dataset.category || '';
+        const status = card.dataset.status || '';
+
+        const matchesQuery = !query || name.includes(query) || desc.includes(query) || tags.includes(query);
+        const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+        const matchesStatus = selectedStatus === 'all' || status === selectedStatus;
+
+        if (matchesQuery && matchesCategory && matchesStatus) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Sorting visible cards
+      const visibleCards = cards.filter((c) => !c.classList.contains('hidden'));
+      visibleCards.sort((a, b) => {
+        if (selectedSort === 'name-asc') {
+          return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+        }
+        if (selectedSort === 'status') {
+          const statusOrder: Record<string, number> = { 'live': 1, 'in-development': 2, 'planned': 3, 'archived': 4 };
+          const orderA = statusOrder[a.dataset.status || ''] || 99;
+          const orderB = statusOrder[b.dataset.status || ''] || 99;
+          return orderA - orderB;
+        }
+        // Default: featured / initial order
+        return 0;
+      });
+
+      // Re-append sorted cards
+      visibleCards.forEach((c) => grid.appendChild(c));
+
+      // Update feedback
+      if (countDisplay) {
+        countDisplay.textContent = `Showing ${visibleCount} of ${cards.length} product${cards.length === 1 ? '' : 's'}`;
+      }
+
+      const isFiltered = query !== '' || selectedCategory !== 'all' || selectedStatus !== 'all';
+      if (resetBtn) {
+        resetBtn.classList.toggle('hidden', !isFiltered);
+      }
+
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+      grid.classList.toggle('hidden', visibleCount === 0);
+    }
+
+    function resetAll() {
+      if (searchInput) searchInput.value = '';
+      if (categorySelect) categorySelect.value = 'all';
+      if (statusSelect) statusSelect.value = 'all';
+      if (sortSelect) sortSelect.value = 'featured';
+      applyFilters();
+    }
+
+    searchInput?.addEventListener('input', applyFilters);
+    categorySelect?.addEventListener('change', applyFilters);
+    statusSelect?.addEventListener('change', applyFilters);
+    sortSelect?.addEventListener('change', applyFilters);
+    resetBtn?.addEventListener('click', resetAll);
+    emptyResetBtn?.addEventListener('click', resetAll);
+
+    // Initial run
+    applyFilters();
+  }
+
+  setupCatalogFilters();
+  document.addEventListener('astro:page-load', setupCatalogFilters);
+</script>

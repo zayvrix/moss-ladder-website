@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <!-- Moss Ladder Architectural Step Monogram -->
+  <rect width="48" height="48" rx="10" fill="#18221B"/>
+  <!-- Ladder Step 1 (Base) -->
+  <rect x="10" y="32" width="16" height="3.5" rx="1.75" fill="#5E7E66"/>
+  <!-- Vertical Riser 1 -->
+  <rect x="22.5" y="24" width="3.5" height="11.5" rx="1.75" fill="#88A38F"/>
+  <!-- Ladder Step 2 (Mid) -->
+  <rect x="16" y="22" width="16" height="3.5" rx="1.75" fill="#A4BEAB"/>
+  <!-- Vertical Riser 2 -->
+  <rect x="28.5" y="14" width="3.5" height="11.5" rx="1.75" fill="#C2D6C7"/>
+  <!-- Ladder Step 3 (Apex) -->
+  <rect x="22" y="12" width="16" height="3.5" rx="1.75" fill="#E8F1EB"/>
+</svg>

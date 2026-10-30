@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <rect width="48" height="48" rx="10" fill="#242129"/>
+  <!-- Paycheck / Split Percentage Bars -->
+  <rect x="12" y="14" width="24" height="20" rx="3" stroke="#8C819F" stroke-width="2"/>
+  <line x1="12" y1="22" x2="36" y2="22" stroke="#8C819F" stroke-width="1.5"/>
+  <rect x="16" y="26" width="6" height="4" rx="1" fill="#BAAFCE"/>
+  <rect x="24" y="26" width="8" height="4" rx="1" fill="#6A5F7D"/>
+</svg>

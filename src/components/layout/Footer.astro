@@ -1,0 +1,161 @@
+---
+import { companyConfig } from '../../config/company';
+import { footerNavigation } from '../../config/navigation';
+
+const currentYear = new Date().getFullYear();
+
+// Check if any verified social profiles exist
+const hasSocial = Object.values(companyConfig.social).some(Boolean);
+---
+
+<footer class="w-full bg-[#131714] text-[#C5CCC7] border-t border-[#232B25] mt-auto">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+    
+    <!-- Top Grid: Brand & Navigation -->
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-[#242E26]">
+      
+      <!-- Brand & Mission Column (Span 2) -->
+      <div class="md:col-span-2 space-y-4">
+        <a 
+          href="/" 
+          class="inline-flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#628B6D] rounded"
+        >
+          <span class="w-8 h-8 rounded-lg bg-[#243428] flex items-center justify-center p-1.5 border border-[#374D3D]">
+            <svg viewBox="0 0 48 48" class="w-full h-full" fill="none" aria-hidden="true">
+              <rect x="10" y="32" width="16" height="3.5" rx="1.75" fill="#6B8D74"/>
+              <rect x="22.5" y="24" width="3.5" height="11.5" rx="1.75" fill="#93B09A"/>
+              <rect x="16" y="22" width="16" height="3.5" rx="1.75" fill="#B7CDC0"/>
+              <rect x="28.5" y="14" width="3.5" height="11.5" rx="1.75" fill="#D9E7DE"/>
+              <rect x="22" y="12" width="16" height="3.5" rx="1.75" fill="#F4FAF6"/>
+            </svg>
+          </span>
+          <span class="text-base font-bold tracking-[0.14em] text-[#F3F7F4] uppercase font-mono">
+            {companyConfig.name}
+          </span>
+        </a>
+
+        <p class="text-sm leading-relaxed text-[#9BA89F] max-w-sm">
+          {companyConfig.positioning}
+        </p>
+
+        <p class="text-xs text-[#75857A] italic">
+          "{companyConfig.tagline}"
+        </p>
+
+        {hasSocial && (
+          <div class="pt-2 flex items-center gap-4">
+            {companyConfig.social.github && (
+              <a 
+                href={companyConfig.social.github} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-[#9BA89F] hover:text-white transition-colors"
+                aria-label="GitHub Profile"
+              >
+                GitHub
+              </a>
+            )}
+            {companyConfig.social.x && (
+              <a 
+                href={companyConfig.social.x} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-[#9BA89F] hover:text-white transition-colors"
+                aria-label="X Profile"
+              >
+                X (Twitter)
+              </a>
+            )}
+            {companyConfig.social.linkedin && (
+              <a 
+                href={companyConfig.social.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-[#9BA89F] hover:text-white transition-colors"
+                aria-label="LinkedIn Profile"
+              >
+                LinkedIn
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+
+      <!-- Navigation Columns (Span 3) -->
+      <div>
+        <h2 class="text-xs font-semibold tracking-wider uppercase text-[#8EA093] mb-3">
+          Portfolio
+        </h2>
+        <ul class="space-y-2.5 text-sm">
+          {footerNavigation.products.map((item) => (
+            <li>
+              <a 
+                href={item.href} 
+                class="text-[#9FAEA4] hover:text-[#FFFFFF] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#628B6D] rounded"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-xs font-semibold tracking-wider uppercase text-[#8EA093] mb-3">
+          Organization
+        </h2>
+        <ul class="space-y-2.5 text-sm">
+          {footerNavigation.company.map((item) => (
+            <li>
+              <a 
+                href={item.href} 
+                class="text-[#9FAEA4] hover:text-[#FFFFFF] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#628B6D] rounded"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-xs font-semibold tracking-wider uppercase text-[#8EA093] mb-3">
+          Legal
+        </h2>
+        <ul class="space-y-2.5 text-sm">
+          {footerNavigation.legal.map((item) => (
+            <li>
+              <a 
+                href={item.href} 
+                class="text-[#9FAEA4] hover:text-[#FFFFFF] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#628B6D] rounded"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar: Legal Disclaimer & Copyright -->
+    <div class="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs text-[#7A8C80]">
+      <div class="space-y-1">
+        <p>
+          &copy; {currentYear} {companyConfig.name}. All rights reserved.
+        </p>
+        <p class="text-[11px] text-[#69796F]">
+          {companyConfig.legal.notice}
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-[#3B5742]" aria-hidden="true"></span>
+        <span class="font-mono text-[11px] text-[#86968B]">
+          Standard: {companyConfig.attributionText}
+        </span>
+      </div>
+    </div>
+
+  </div>
+</footer>

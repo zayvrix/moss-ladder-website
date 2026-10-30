@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <rect width="48" height="48" rx="10" fill="#1A2D23"/>
+  <!-- Pie / Ratio Division Motif -->
+  <circle cx="24" cy="24" r="14" stroke="#486D58" stroke-width="2.5"/>
+  <path d="M24 10 A14 14 0 0 1 38 24 L24 24 Z" fill="#69A781"/>
+  <path d="M24 24 L14 34" stroke="#E3EFE7" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="24" cy="24" r="3" fill="#E3EFE7"/>
+</svg>

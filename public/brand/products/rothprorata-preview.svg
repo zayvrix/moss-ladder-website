@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480" fill="none">
+  <rect width="800" height="480" rx="12" fill="#151916" stroke="#252E27" stroke-width="2"/>
+  
+  <!-- Browser Header Bar -->
+  <rect x="0" y="0" width="800" height="48" fill="#1C221D" rx="12"/>
+  <rect x="0" y="36" width="800" height="12" fill="#1C221D"/>
+  <circle cx="28" cy="24" r="5" fill="#3E4940"/>
+  <circle cx="44" cy="24" r="5" fill="#3E4940"/>
+  <circle cx="60" cy="24" r="5" fill="#3E4940"/>
+  <rect x="96" y="14" width="320" height="20" rx="4" fill="#252E27"/>
+  <text x="110" y="28" font-family="monospace" font-size="11" fill="#8CA091">https://rothprorata.com</text>
+
+  <!-- Content Split Layout -->
+  <!-- Left Side: Inputs -->
+  <g transform="translate(48, 80)">
+    <rect width="320" height="350" rx="8" fill="#1A201B" stroke="#2B362E"/>
+    <text x="24" y="36" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#E2EBE5">Aggregate IRA Balances</text>
+    
+    <!-- Input 1 -->
+    <text x="24" y="76" font-family="system-ui, sans-serif" font-size="12" fill="#93A699">Traditional IRA (Dec 31 Value)</text>
+    <rect x="24" y="86" width="272" height="36" rx="4" fill="#242D26" stroke="#354338"/>
+    <text x="36" y="109" font-family="monospace" font-size="13" fill="#D5E3DA">$65,000.00</text>
+
+    <!-- Input 2 -->
+    <text x="24" y="146" font-family="system-ui, sans-serif" font-size="12" fill="#93A699">SEP / SIMPLE IRA Balances</text>
+    <rect x="24" y="156" width="272" height="36" rx="4" fill="#242D26" stroke="#354338"/>
+    <text x="36" y="179" font-family="monospace" font-size="13" fill="#D5E3DA">$0.00</text>
+
+    <!-- Input 3 -->
+    <text x="24" y="216" font-family="system-ui, sans-serif" font-size="12" fill="#93A699">Non-Deductible Basis (Form 8606)</text>
+    <rect x="24" y="226" width="272" height="36" rx="4" fill="#242D26" stroke="#354338"/>
+    <text x="36" y="249" font-family="monospace" font-size="13" fill="#69A781">$7,000.00</text>
+
+    <!-- Input 4 -->
+    <text x="24" y="286" font-family="system-ui, sans-serif" font-size="12" fill="#93A699">Planned Conversion Amount</text>
+    <rect x="24" y="296" width="272" height="36" rx="4" fill="#242D26" stroke="#354338"/>
+    <text x="36" y="319" font-family="monospace" font-size="13" fill="#D5E3DA">$7,000.00</text>
+  </g>
+
+  <!-- Right Side: Calculation Engine & Ratio Visualizer -->
+  <g transform="translate(400, 80)">
+    <rect width="352" height="350" rx="8" fill="#1A201B" stroke="#2B362E"/>
+    <text x="28" y="36" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#E2EBE5">Pro-Rata Conversion Breakdown</text>
+
+    <!-- Ratio Gauge -->
+    <rect x="28" y="60" width="296" height="18" rx="4" fill="#2E3931"/>
+    <rect x="28" y="60" width="28" height="18" rx="4" fill="#52B774"/>
+    <rect x="56" y="60" width="268" height="18" fill="#A85751"/>
+    
+    <text x="28" y="98" font-family="system-ui, sans-serif" font-size="11" fill="#69A781">■ 9.72% Tax-Free Basis</text>
+    <text x="180" y="98" font-family="system-ui, sans-serif" font-size="11" fill="#E08B85">■ 90.28% Taxable Income</text>
+
+    <!-- Result Card 1 -->
+    <g transform="translate(28, 120)">
+      <rect width="296" height="70" rx="6" fill="#222B24" stroke="#303E33"/>
+      <text x="16" y="28" font-family="system-ui, sans-serif" font-size="12" fill="#97ABA0">Estimated Taxable Distribution</text>
+      <text x="16" y="54" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#F09B95">$6,319.44</text>
+    </g>
+
+    <!-- Result Card 2 -->
+    <g transform="translate(28, 206)">
+      <rect width="296" height="70" rx="6" fill="#222B24" stroke="#303E33"/>
+      <text x="16" y="28" font-family="system-ui, sans-serif" font-size="12" fill="#97ABA0">Non-Taxable Return of Basis</text>
+      <text x="16" y="54" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#75C693">$680.56</text>
+    </g>
+
+    <!-- Formula Note -->
+    <rect x="28" y="292" width="296" height="38" rx="4" fill="#161C18"/>
+    <text x="40" y="316" font-family="monospace" font-size="11" fill="#8DA695">Ratio = Basis ($7k) / Total Aggregate ($72k)</text>
+  </g>
+</svg>

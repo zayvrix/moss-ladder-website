@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { companyConfig } from '../config/company';
+import { generateBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Terms of Use', url: '/terms/' },
+];
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+---
+
+<BaseLayout
+  title="Terms of Use (Draft for Review)"
+  description="Terms of Use draft governing Moss Ladder and its portfolio websites."
+  canonicalPath="/terms/"
+  schema={breadcrumbSchema}
+>
+  
+  <header class="py-12 md:py-16 border-b border-[#E5E8E3] bg-[#F7F9F7]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center gap-2 text-xs font-mono text-[#6A786F]">
+          <li><a href="/" class="hover:text-[#182B1E] transition-colors">Home</a></li>
+          <li><span class="text-[#A2AEA5]">/</span></li>
+          <li class="text-[#1E3022] font-semibold" aria-current="page">Terms of Use</li>
+        </ol>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-900 mb-4 font-mono">
+        <span>Draft for Owner Legal Review</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#111412]">
+        Terms of Use
+      </h1>
+
+      <p class="text-sm text-[#556358] mt-2 font-mono">
+        Last updated: October 2026 • Operates under independent studio governance
+      </p>
+
+    </div>
+  </header>
+
+  <article class="py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 space-y-10 text-[#2B352E] text-sm leading-relaxed">
+      
+      <div class="p-4 rounded-lg bg-amber-50/70 border border-amber-200/80 text-amber-900 text-xs leading-relaxed">
+        <strong>Legal Notice to Site Owner:</strong> This draft outlines standard digital product portfolio terms, explicitly disclaiming licensed financial/legal advice for computational tools. Review and update this draft before formal commercial operation.
+      </div>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#131615]">1. Acceptance of Terms</h2>
+        <p>
+          By accessing or browsing this website operated by Moss Ladder ("we", "us", or "our"), you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+        </p>
+      </section>
+
+      <section class="space-y-3 border-t border-[#EAECE8] pt-8">
+        <h2 class="text-xl font-bold text-[#131615]">2. No Financial, Tax, or Legal Advice Disclaimer</h2>
+        <div class="p-4 rounded-lg bg-[#FAFBF9] border border-[#DDE3DD] text-[#334237] text-xs leading-relaxed space-y-2">
+          <p>
+            <strong>IMPORTANT:</strong> The computational models, calculators, and educational content across Moss Ladder properties (including RothProRata, IRMAA Clarity, and related planning tools) are provided strictly for general informational and educational scenario analysis.
+          </p>
+          <p>
+            Moss Ladder does not provide registered investment advisory services, legal counsel, or certified public accounting advice. Tax codes and statutory thresholds (such as IRS pro-rata aggregation rules or Medicare IRMAA MAGI cliffs) are subject to legislative changes and individual taxpayer variations. Always verify calculations with a qualified CPA, enrolled agent, tax attorney, or financial advisor before making binding financial decisions or filing tax returns.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3 border-t border-[#EAECE8] pt-8">
+        <h2 class="text-xl font-bold text-[#131615]">3. Intellectual Property Rights</h2>
+        <p>
+          All trademarks, wordmarks ("Moss Ladder"), trade dress, architectural layout systems, design assets, and source code on this site are the intellectual property of Moss Ladder and its operator, protected by applicable copyright and trademark laws. You may not scrape, reproduce, duplicate, or redistribute our proprietary code or brand assets without explicit written permission.
+        </p>
+      </section>
+
+      <section class="space-y-3 border-t border-[#EAECE8] pt-8">
+        <h2 class="text-xl font-bold text-[#131615]">4. External Portfolio Properties</h2>
+        <p>
+          This website functions as a directory and corporate hub for distinct digital products. When navigating to external tools (such as rothprorata.com), you may become subject to specific end-user agreements or software licenses governing that particular application.
+        </p>
+      </section>
+
+      <section class="space-y-3 border-t border-[#EAECE8] pt-8">
+        <h2 class="text-xl font-bold text-[#131615]">5. Disclaimer of Warranties & Limitation of Liability</h2>
+        <p>
+          This website and its directory are provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied. To the maximum extent permitted by law, Moss Ladder disclaims all liability for any direct, indirect, incidental, consequential, or punitive damages arising out of your access to or inability to use this site or its referenced software tools.
+        </p>
+      </section>
+
+      <section class="space-y-3 border-t border-[#EAECE8] pt-8">
+        <h2 class="text-xl font-bold text-[#131615]">6. Modifications to Terms</h2>
+        <p>
+          We reserve the right to revise these terms of service at any time without prior notice. By continuing to use this website, you agree to be bound by the then-current version of these Terms of Use.
+        </p>
+      </section>
+
+      <section class="space-y-3 border-t border-[#EAECE8] pt-8">
+        <h2 class="text-xl font-bold text-[#131615]">7. Contact</h2>
+        <p>
+          If you have questions regarding these terms, please contact:
+        </p>
+        <div class="p-4 rounded-lg bg-[#F5F7F5] border border-[#DFE6DF] font-mono text-xs space-y-1">
+          <div><strong>Operator:</strong> {companyConfig.name}</div>
+          <div><strong>Email:</strong> {companyConfig.contact.primaryEmail || companyConfig.contact.fallbackEmail}</div>
+        </div>
+      </section>
+
+    </div>
+  </article>
+
+</BaseLayout>

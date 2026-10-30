@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <rect width="48" height="48" rx="10" fill="#202528"/>
+  <!-- Tier / Cliff Surcharge Steps -->
+  <path d="M10 36 L18 36 L18 28 L26 28 L26 20 L34 20 L34 12 L38 12" stroke="#688C9F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="34" cy="12" r="3" fill="#A8CADC"/>
+  <circle cx="26" cy="20" r="2.5" fill="#688C9F"/>
+  <circle cx="18" cy="28" r="2.5" fill="#4B6A7A"/>
+</svg>

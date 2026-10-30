@@ -1,0 +1,438 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/products/ProductCard.astro';
+import StatusBadge from '../components/ui/StatusBadge.astro';
+import { companyConfig } from '../config/company';
+import { getFeaturedProducts, getAllProducts, getProductCounts } from '../utils/products';
+
+const featuredProducts = getFeaturedProducts();
+const allProducts = getAllProducts();
+const counts = getProductCounts();
+const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
+---
+
+<BaseLayout 
+  title={companyConfig.name}
+  description={companyConfig.description}
+  canonicalPath="/"
+>
+  
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 border-b border-[#E5E8E3] overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left: Copy & CTAs (Span 7) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Brand Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF0EC] border border-[#CCD8CF] text-xs font-semibold text-[#243B2B]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#3D6B48]"></span>
+            <span>Independent Digital Product Studio</span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111412] leading-[1.12]">
+            {companyConfig.tagline}
+          </h1>
+
+          <!-- Body Copy -->
+          <p class="text-lg sm:text-xl text-[#4A554D] leading-relaxed max-w-2xl font-normal">
+            Moss Ladder builds independent digital tools and web products that turn complicated tasks into clearer, more practical experiences.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <a
+              href="/products/"
+              class="inline-flex items-center justify-center px-6 py-3.5 rounded-lg bg-[#243428] text-white text-sm font-semibold hover:bg-[#324737] transition-all shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#243428]"
+            >
+              Explore Products
+            </a>
+            <a
+              href="/about/"
+              class="inline-flex items-center justify-center px-6 py-3.5 rounded-lg bg-white border border-[#D5DCD5] text-[#243428] text-sm font-semibold hover:bg-[#F2F5F2] hover:border-[#CAD4CA] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#243428]"
+            >
+              About Moss Ladder
+            </a>
+          </div>
+
+          <!-- Micro Stats / Reality Statement -->
+          <div class="pt-6 flex items-center gap-6 text-xs text-[#637267] border-t border-[#EAECE8]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#3D6B48]"></span>
+              <span><strong>{counts.live}</strong> live release</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#829186]"></span>
+              <span><strong>{counts.planned}</strong> products in pipeline</span>
+            </div>
+            <div class="hidden sm:block text-[#97A59B]">
+              Independent operator • No venture debt
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Digital Product Ecosystem Graphic (Span 5) -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md bg-white rounded-2xl border border-[#D9E0DA] p-6 shadow-sm">
+            
+            <!-- Graphic Top Bar -->
+            <div class="flex items-center justify-between pb-4 border-b border-[#EEF2EE] mb-5">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#3D6B48]"></span>
+                <span class="text-xs font-mono font-medium text-[#4B594E]">MOSS_LADDER_SYSTEM</span>
+              </div>
+              <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#F2F5F2] text-[#55675A]">
+                Multi-Product Mesh
+              </span>
+            </div>
+
+            <!-- Coordinated Product Nodes Schematic -->
+            <div class="space-y-3 font-mono text-xs">
+              
+              <!-- Node 1: RothProRata (Live) -->
+              <div class="p-3.5 rounded-lg bg-[#F3F7F4] border border-[#CCD8CF] flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 rounded bg-[#253A2C] text-[#DCE7DF] flex items-center justify-center font-bold text-[10px]">
+                    RP
+                  </span>
+                  <div>
+                    <div class="font-bold text-[#1A281E]">RothProRata</div>
+                    <div class="text-[10px] text-[#5B6D60]">Tax Calculation Engine</div>
+                  </div>
+                </div>
+                <StatusBadge status="live" size="sm" />
+              </div>
+
+              <!-- Connecting Line -->
+              <div class="flex justify-center -my-1 text-[#9BB1A1]">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+
+              <!-- Node 2: IRMAA Clarity -->
+              <div class="p-3.5 rounded-lg bg-[#FAFBF9] border border-[#E5E9E4] flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 rounded bg-[#35434A] text-[#DFE7EB] flex items-center justify-center font-bold text-[10px]">
+                    IC
+                  </span>
+                  <div>
+                    <div class="font-bold text-[#2A343A]">IRMAA Clarity</div>
+                    <div class="text-[10px] text-[#697880]">Medicare Tier Projection</div>
+                  </div>
+                </div>
+                <StatusBadge status="planned" size="sm" />
+              </div>
+
+              <!-- Node 3: Future Utility Products -->
+              <div class="p-3.5 rounded-lg bg-[#FAFBF9] border border-dashed border-[#CCD4CD] flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 rounded bg-[#E4EAE5] text-[#546558] flex items-center justify-center font-bold text-[10px]">
+                    +N
+                  </span>
+                  <div>
+                    <div class="font-semibold text-[#48574C]">Future Utility Tools</div>
+                    <div class="text-[10px] text-[#718275]">Calculators • Utilities • Software</div>
+                  </div>
+                </div>
+                <span class="text-[10px] text-[#7A8C80] font-sans italic">Roadmap</span>
+              </div>
+
+            </div>
+
+            <!-- Architectural Legend -->
+            <div class="mt-5 pt-4 border-t border-[#EEF2EE] flex items-center justify-between text-[11px] text-[#67776C]">
+              <span>Modular Architecture</span>
+              <span class="font-mono text-[#3D6B48]">SSG / Edge Ready</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Product Spotlight: RothProRata -->
+  {rothProRata && (
+    <section class="py-16 md:py-20 bg-white border-b border-[#E5E8E3]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="mb-8">
+          <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#3D6B48] mb-2 font-mono">
+            <span>Featured Product</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#131615]">
+            Featured Live Release: RothProRata
+          </h2>
+          <p class="text-sm text-[#546257] mt-1 max-w-xl">
+            A real, working tool built to calculate the IRS pro-rata rule for Backdoor Roth IRA conversions.
+          </p>
+        </div>
+
+        <div class="bg-[#F8FAF8] rounded-2xl border border-[#DCE4DE] overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-8 lg:p-10">
+          
+          <!-- Details Left (Span 6) -->
+          <div class="lg:col-span-6 space-y-5">
+            <div class="flex items-center gap-3">
+              <StatusBadge status="live" size="md" />
+              <span class="text-xs font-mono text-[#57695B]">rothprorata.com</span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-bold text-[#141A16]">
+              {rothProRata.name}
+            </h3>
+
+            <p class="text-sm text-[#465449] leading-relaxed">
+              {rothProRata.description}
+            </p>
+
+            <!-- Features Checklist -->
+            <ul class="space-y-2 text-xs text-[#4F5E52] pt-2">
+              {rothProRata.features?.map((feat) => (
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-[#355B3E] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="pt-3 flex flex-wrap items-center gap-4">
+              <a
+                href={rothProRata.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#243428] text-white text-xs font-semibold hover:bg-[#324737] transition-colors shadow-xs"
+              >
+                <span>Launch Tool Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+              <a
+                href={`/products/${rothProRata.slug}/`}
+                class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg border border-[#CCD8CF] bg-white text-xs font-semibold text-[#243428] hover:bg-[#F2F6F3] transition-colors"
+              >
+                <span>View Full Specifications</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Preview Schematic Right (Span 6) -->
+          <div class="lg:col-span-6">
+            <div class="rounded-xl overflow-hidden border border-[#D5DDD6] shadow-sm bg-[#151916]">
+              <img 
+                src="/brand/products/rothprorata-preview.svg" 
+                alt="RothProRata User Interface Preview" 
+                class="w-full h-auto object-cover"
+                width="800"
+                height="480"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  )}
+
+  <!-- What We Build Section -->
+  <section class="py-16 md:py-24 border-b border-[#E5E8E3]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-14">
+        <h2 class="text-xs font-mono font-semibold uppercase tracking-wider text-[#3D6B48] mb-2">
+          Scope & Portfolio
+        </h2>
+        <h3 class="text-3xl font-bold text-[#131615] tracking-tight">
+          What We Build
+        </h3>
+        <p class="text-base text-[#526056] mt-3 leading-relaxed">
+          Moss Ladder is an umbrella brand for independent digital products across multiple domains. While our earliest releases focus on precision financial and tax calculations, our roadmap spans practical utility software and focused web tools.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Pillar 1 -->
+        <div class="bg-white p-7 rounded-xl border border-[#E5E8E3] shadow-xs space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-[#EBF0EC] text-[#284230] flex items-center justify-center font-mono font-bold text-sm">
+            01
+          </div>
+          <h4 class="text-lg font-bold text-[#131615]">
+            Decision & Planning Engines
+          </h4>
+          <p class="text-sm text-[#556358] leading-relaxed">
+            Tools like RothProRata and IRMAA Clarity that turn opaque statutory formulas and IRS regulations into deterministic, visual calculation models.
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="bg-white p-7 rounded-xl border border-[#E5E8E3] shadow-xs space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-[#EBF0EC] text-[#284230] flex items-center justify-center font-mono font-bold text-sm">
+            02
+          </div>
+          <h4 class="text-lg font-bold text-[#131615]">
+            Focused Utility Software
+          </h4>
+          <p class="text-sm text-[#556358] leading-relaxed">
+            Lightweight, high-speed single-purpose web utilities engineered for specific operational workflows without onboarding friction or recurring fees.
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="bg-white p-7 rounded-xl border border-[#E5E8E3] shadow-xs space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-[#EBF0EC] text-[#284230] flex items-center justify-center font-mono font-bold text-sm">
+            03
+          </div>
+          <h4 class="text-lg font-bold text-[#131615]">
+            Educational Reference Models
+          </h4>
+          <p class="text-sm text-[#556358] leading-relaxed">
+            Structured reference websites that demystify complex rules, thresholds, and administrative criteria with clear scenario comparisons.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Our Approach / Disciplines -->
+  <section class="py-16 md:py-24 bg-[#141815] text-[#D8E0DA] border-b border-[#242C25]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-14">
+        <h2 class="text-xs font-mono font-semibold uppercase tracking-wider text-[#799C82] mb-2">
+          Operating Disciplines
+        </h2>
+        <h3 class="text-3xl font-bold text-white tracking-tight">
+          How We Work
+        </h3>
+        <p class="text-base text-[#9AA89E] mt-3 leading-relaxed">
+          We operate without hype, vanity metrics, or artificial corporate posturing. Every product under the Moss Ladder umbrella adheres to four core engineering standards.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="p-6 rounded-xl bg-[#1C221D] border border-[#2D382F] space-y-2">
+          <div class="text-xs font-mono text-[#82A88D] uppercase tracking-wider">01 / Utility</div>
+          <h4 class="text-base font-bold text-white">Deliberate Purpose</h4>
+          <p class="text-xs leading-relaxed text-[#9BA89E]">
+            We only build tools that address real computational friction points, verified against actual user workflows and official source documentation.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#1C221D] border border-[#2D382F] space-y-2">
+          <div class="text-xs font-mono text-[#82A88D] uppercase tracking-wider">02 / Privacy</div>
+          <h4 class="text-base font-bold text-white">Zero-Storage Default</h4>
+          <p class="text-xs leading-relaxed text-[#9BA89E]">
+            Our calculators compute data entirely client-side whenever possible. We do not store sensitive personal financial figures or sell user behavior.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#1C221D] border border-[#2D382F] space-y-2">
+          <div class="text-xs font-mono text-[#82A88D] uppercase tracking-wider">03 / Craft</div>
+          <h4 class="text-base font-bold text-white">Architectural Rigor</h4>
+          <p class="text-xs leading-relaxed text-[#9BA89E]">
+            Clean typography, accessible keyboard navigation, predictable layout behavior, and fast static generation without megabytes of runtime script.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#1C221D] border border-[#2D382F] space-y-2">
+          <div class="text-xs font-mono text-[#82A88D] uppercase tracking-wider">04 / Ownership</div>
+          <h4 class="text-base font-bold text-white">Long-Term Stability</h4>
+          <p class="text-xs leading-relaxed text-[#9BA89E]">
+            Operated independently by a single builder. Low overhead and zero external debt guarantee longevity and maintainability across all releases.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Selected Work Grid -->
+  <section class="py-16 md:py-24 border-b border-[#E5E8E3]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <h2 class="text-xs font-mono font-semibold uppercase tracking-wider text-[#3D6B48] mb-1">
+            Current Catalog
+          </h2>
+          <h3 class="text-3xl font-bold text-[#131615] tracking-tight">
+            Selected Products & Pipeline
+          </h3>
+          <p class="text-sm text-[#556358] mt-1">
+            Browse live software and active projects in development.
+          </p>
+        </div>
+        <a
+          href="/products/"
+          class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#243428] hover:text-[#131615] hover:underline underline-offset-4"
+        >
+          <span>View all {allProducts.length} products</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredProducts.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href="/products/"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-[#CDD6CF] bg-white text-xs font-semibold text-[#243428] hover:bg-[#F2F6F3] transition-colors"
+        >
+          Browse Entire Product Directory &rarr;
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Explore CTA / Contact Banner -->
+  <section class="py-16 md:py-20 bg-[#F4F6F3]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#131615] tracking-tight">
+        Have questions or product feedback?
+      </h2>
+      <p class="text-sm sm:text-base text-[#526055] max-w-xl mx-auto leading-relaxed">
+        Whether you are using RothProRata, tracking upcoming planning tools, or interested in partnerships, we welcome your direct communication.
+      </p>
+      <div class="pt-2 flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/contact/"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#243428] text-white text-xs font-semibold hover:bg-[#324737] transition-colors shadow-xs"
+        >
+          Contact Support & Inquiries
+        </a>
+        <a
+          href="/about/"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-white border border-[#D5DCD5] text-xs font-semibold text-[#243428] hover:bg-[#FAFBF9] transition-colors"
+        >
+          Read Our Story
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg-base: #FBFBF9;
+    --color-bg-surface: #FFFFFF;
+    --color-bg-subtle: #F4F5F1;
+    --color-bg-card: #FFFFFF;
+    --color-bg-contrast: #131714;
+
+    --color-text-primary: #121513;
+    --color-text-secondary: #525C54;
+    --color-text-muted: #7A857D;
+
+    --color-border-subtle: #E5E8E3;
+    --color-border-strong: #CDD3CB;
+
+    --color-moss-50: #F3F7F4;
+    --color-moss-100: #E4ECE5;
+    --color-moss-200: #C9D9CC;
+    --color-moss-600: #35523C;
+    --color-moss-700: #29402F;
+    --color-moss-800: #1F3024;
+    --color-moss-900: #142018;
+
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Accessibility: Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Accessible focus ring for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid var(--color-moss-700);
+    outline-offset: 3px;
+  }
+}
+
+/* Custom utility classes */
+.container-narrow {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.container-wide {
+  max-width: 76rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.border-subtle {
+  border-color: #E5E8E3;
+}
+
+.bg-surface {
+  background-color: #FFFFFF;
+}
+
+.bg-canvas {
+  background-color: #FBFBF9;
+}
+
+.bg-subtle {
+  background-color: #F4F5F1;
+}
+
+.text-graphite {
+  color: #121513;
+}
+
+.text-muted-gray {
+  color: #525C54;
+}
+
+.moss-accent-bg {
+  background-color: #2E4534;
+}
+
+.moss-accent-bg:hover {
+  background-color: #385440;
+}
