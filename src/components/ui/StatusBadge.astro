@@ -1,21 +1,8 @@
 ---
 import type { ProductStatus } from '../../types/product';
 import { formatProductStatus } from '../../utils/products';
-
-interface Props {
-  status: ProductStatus;
-  size?: 'sm' | 'md';
-}
-
+interface Props { status: ProductStatus; size?: 'sm' | 'md'; }
 const { status, size = 'sm' } = Astro.props;
-const { label, badgeClass, dotClass } = formatProductStatus(status);
-
-const sizeClass = size === 'sm' ? 'text-[11px] px-2 py-0.5' : 'text-xs px-2.5 py-1';
+const { label } = formatProductStatus(status);
 ---
-
-<span
-  class={`inline-flex items-center gap-1.5 font-medium rounded-full border shadow-2xs ${badgeClass} ${sizeClass}`}
->
-  <span class={`w-1.5 h-1.5 rounded-full ${dotClass}`} aria-hidden="true"></span>
-  <span>{label}</span>
-</span>
+<span class:list={['status-badge', `status-${status}`, `status-size-${size}`]}>{label}</span>

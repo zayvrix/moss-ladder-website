@@ -32,6 +32,8 @@ describe('SEO & Structured Data Helpers', () => {
     expect(org['@type']).toBe('Organization');
     expect(org.name).toBe('Moss Ladder');
     expect(org.slogan).toBe(companyConfig.tagline);
+    expect(org.email).toBe('contact@mossladder.com');
+    expect(org.sameAs?.length).toBe(4);
     // Ensure no fake employee counts, ratings or certifications
     expect((org as any).numberOfEmployees).toBeUndefined();
     expect((org as any).aggregateRating).toBeUndefined();

@@ -1,134 +1,26 @@
 ---
 import type { Product, Category } from '../../types/product';
 import ProductCard from './ProductCard.astro';
-
-interface Props {
-  products: Product[];
-  categories: Category[];
-  initialCategory?: string;
-}
-
+interface Props { products: Product[]; categories: Category[]; initialCategory?: string; }
 const { products, categories, initialCategory } = Astro.props;
 ---
-
-<div id="product-catalog-root" class="space-y-8" data-initial-category={initialCategory || ''}>
-  
-  <!-- Filter & Search Controls Bar -->
-  <div class="bg-white p-5 sm:p-6 rounded-xl border border-[#E5E8E3] shadow-xs space-y-4">
-    
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-      
-      <!-- Search Input (Span 5) -->
-      <div class="md:col-span-5 relative">
-        <label for="catalog-search" class="sr-only">Search products by name, description, or keyword</label>
-        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#717E75]">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
-        <input
-          type="search"
-          id="catalog-search"
-          placeholder="Search products by keyword..."
-          class="w-full pl-10 pr-4 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] focus:border-transparent text-[#131615] placeholder-[#7E8B81]"
-        />
-      </div>
-
-      <!-- Category Filter (Span 3) -->
-      <div class="md:col-span-3">
-        <label for="category-filter" class="sr-only">Filter by Category</label>
-        <select
-          id="category-filter"
-          class="w-full px-3 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] text-[#131615]"
-        >
-          <option value="all">All Categories</option>
-          {categories.map((c) => (
-            <option value={c.id} selected={initialCategory === c.id || initialCategory === c.slug}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <!-- Status Filter (Span 2) -->
-      <div class="md:col-span-2">
-        <label for="status-filter" class="sr-only">Filter by Status</label>
-        <select
-          id="status-filter"
-          class="w-full px-3 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] text-[#131615]"
-        >
-          <option value="all">All Statuses</option>
-          <option value="live">Live Now</option>
-          <option value="planned">Planned</option>
-          <option value="in-development">In Development</option>
-        </select>
-      </div>
-
-      <!-- Sort Filter (Span 2) -->
-      <div class="md:col-span-2">
-        <label for="sort-filter" class="sr-only">Sort by</label>
-        <select
-          id="sort-filter"
-          class="w-full px-3 py-2 text-sm bg-[#FBFBF9] border border-[#D8DDD6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E4534] text-[#131615]"
-        >
-          <option value="featured">Featured First</option>
-          <option value="name-asc">Alphabetical (A–Z)</option>
-          <option value="status">Status (Live First)</option>
-        </select>
-      </div>
-
+<div id="product-catalog-root" data-initial-category={initialCategory || ''}>
+  <div class="catalog-controls">
+    <div class="catalog-fields">
+      <div class="catalog-search-field"><label for="catalog-search">Search products</label><input type="search" id="catalog-search" placeholder="Name, description, or keyword" /></div>
+      <div><label for="category-filter">Category</label><select id="category-filter"><option value="all">All Categories</option>{categories.map((c) => <option value={c.id} selected={initialCategory === c.id || initialCategory === c.slug}>{c.name}</option>)}</select></div>
+      <div><label for="status-filter">Status</label><select id="status-filter"><option value="all">All Statuses</option><option value="live">Live Now</option><option value="planned">Planned</option><option value="in-development">In Development</option></select></div>
+      <div><label for="sort-filter">Sort by</label><select id="sort-filter"><option value="featured">Featured First</option><option value="name-asc">Alphabetical (A–Z)</option><option value="status">Status (Live First)</option></select></div>
     </div>
-
-    <!-- Active Filters & Result Count Feedback -->
-    <div class="flex items-center justify-between text-xs text-[#5E6D62] pt-2 border-t border-[#F0F2EE]">
-      <div id="results-count" class="font-medium">
-        Showing all {products.length} products
-      </div>
-      <button
-        id="reset-filters"
-        type="button"
-        class="hidden text-[#294230] hover:text-[#131615] font-semibold underline underline-offset-2"
-      >
-        Clear filters
-      </button>
-    </div>
-
+    <div class="catalog-feedback"><p id="results-count" role="status" aria-live="polite">Showing all {products.length} products</p><button id="reset-filters" type="button" class="text-link hidden">Clear filters</button></div>
   </div>
-
-  <!-- Product Cards Grid -->
-  <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {products.map((product) => (
-      <ProductCard product={product} />
-    ))}
+  <div id="products-grid" class="product-list">{products.map((product) => <ProductCard product={product} />)}</div>
+  <div id="empty-state" class="empty-state hidden">
+    <h2>No matching products found</h2>
+    <p>We couldn’t find any digital tools matching your current filter criteria. Try adjusting keywords or clearing filters.</p>
+    <button id="empty-reset-button" type="button" class="btn">Reset all filters</button>
   </div>
-
-  <!-- Empty State (Shown when search/filter returns zero matches) -->
-  <div
-    id="empty-state"
-    class="hidden bg-white rounded-xl border border-dashed border-[#CCD3CC] p-12 text-center space-y-4"
-  >
-    <div class="w-12 h-12 mx-auto rounded-full bg-[#F2F5F2] flex items-center justify-center text-[#586A5D]">
-      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    </div>
-    <div class="space-y-1">
-      <h3 class="text-base font-semibold text-[#131615]">No matching products found</h3>
-      <p class="text-xs text-[#627167] max-w-sm mx-auto">
-        We couldn't find any digital tools matching your current filter criteria. Try adjusting keywords or clearing filters.
-      </p>
-    </div>
-    <button
-      id="empty-reset-button"
-      type="button"
-      class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-[#243428] text-white text-xs font-medium hover:bg-[#324737] transition-colors"
-    >
-      Reset all filters
-    </button>
-  </div>
-
 </div>
-
 <script>
   function setupCatalogFilters() {
     const root = document.getElementById('product-catalog-root');
@@ -232,3 +124,19 @@ const { products, categories, initialCategory } = Astro.props;
   setupCatalogFilters();
   document.addEventListener('astro:page-load', setupCatalogFilters);
 </script>
+
+<style>
+  /* Hallmark · theme: custom · redesign: full · shape: searchable product index · genre: editorial · v2.0.0 */
+  /* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V4 · weakest: E, visible field labels and a live result count make the index explicit */
+  .catalog-controls { margin-bottom: var(--space-xl); }
+  .catalog-fields { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); gap: var(--space-lg); }
+  .catalog-fields label { display: block; font-size: var(--text-sm); margin-bottom: var(--space-xs); font-weight: 500; }
+  .catalog-fields input, .catalog-fields select { min-width: 0; width: 100%; height: 48px; border: 1px solid var(--color-muted); border-radius: var(--radius-input); padding: var(--space-sm) var(--space-md); color: var(--color-ink); background: var(--color-paper); font-size: var(--text-md); }
+  .catalog-fields input::placeholder { color: var(--color-muted); opacity: 1; }
+  .catalog-feedback { display: flex; align-items: center; justify-content: space-between; min-height: 64px; font-size: var(--text-sm); color: var(--color-muted); margin-top: var(--space-md); }
+  .empty-state { padding-block: var(--space-2xl); }
+  .empty-state h2 { text-wrap: balance; min-width: 0; overflow-wrap: break-word; font-size: var(--text-section); max-width: 18ch; }
+  .empty-state p { margin-block: var(--space-lg) var(--space-xl); max-width: 55ch; }
+  @media (max-width: 60rem) { .catalog-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 40rem) { .catalog-fields { grid-template-columns: minmax(0, 1fr); } }
+</style>

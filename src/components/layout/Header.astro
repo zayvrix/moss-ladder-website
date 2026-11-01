@@ -1,140 +1,36 @@
 ---
 import { companyConfig } from '../../config/company';
 import { primaryNavigation } from '../../config/navigation';
-
-interface Props {
-  currentPath?: string;
-}
-
+interface Props { currentPath?: string; }
 const { currentPath = Astro.url.pathname } = Astro.props;
-
-const isActive = (href: string) => {
-  if (href === '/') return currentPath === '/';
-  return currentPath.startsWith(href);
-};
+const isActive = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
-
-<header class="sticky top-0 z-40 w-full bg-[#FBFBF9]/90 backdrop-blur-md border-b border-[#E5E8E3]">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-18">
-      
-      <!-- Brand Identity Link -->
-      <a 
-        href="/" 
-        class="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4534] rounded-md py-1 pr-2"
-        aria-label={`${companyConfig.name} - Home`}
-      >
-        <span class="w-8 h-8 rounded-lg bg-[#18221B] flex items-center justify-center p-1.5 shadow-xs transition-transform duration-150 group-hover:scale-105">
-          <svg viewBox="0 0 48 48" class="w-full h-full" fill="none" aria-hidden="true">
-            <rect x="10" y="32" width="16" height="3.5" rx="1.75" fill="#5E7E66"/>
-            <rect x="22.5" y="24" width="3.5" height="11.5" rx="1.75" fill="#88A38F"/>
-            <rect x="16" y="22" width="16" height="3.5" rx="1.75" fill="#A4BEAB"/>
-            <rect x="28.5" y="14" width="3.5" height="11.5" rx="1.75" fill="#C2D6C7"/>
-            <rect x="22" y="12" width="16" height="3.5" rx="1.75" fill="#E8F1EB"/>
-          </svg>
-        </span>
-        <div class="flex flex-col">
-          <span class="text-[15px] font-bold tracking-[0.12em] text-[#131615] uppercase font-mono">
-            {companyConfig.name}
-          </span>
-          <span class="text-[10px] text-[#5A645D] tracking-wider uppercase font-sans">
-            Digital Products
-          </span>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-8" aria-label="Main Navigation">
-        <ul class="flex items-center gap-6 text-[14px] font-medium text-[#525C54]">
-          {primaryNavigation.map((item) => {
-            const active = isActive(item.href);
-            return (
-              <li>
-                <a
-                  href={item.href}
-                  class={`transition-colors py-1.5 px-1 relative ${
-                    active 
-                      ? 'text-[#121513] font-semibold' 
-                      : 'hover:text-[#121513]'
-                  }`}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {item.label}
-                  {active && (
-                    <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#2E4534] rounded-full" />
-                  )}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-
-        <!-- Action CTA -->
-        <a
-          href="/products/"
-          class="inline-flex items-center justify-center text-xs font-semibold px-4 py-2 rounded-md bg-[#243428] text-[#F3F7F4] hover:bg-[#314736] transition-colors shadow-xs"
-        >
-          Explore Catalog
-        </a>
-      </nav>
-
-      <!-- Mobile Menu Button -->
-      <button
-        id="mobile-menu-toggle"
-        type="button"
-        class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-[#525C54] hover:text-[#121513] hover:bg-[#F2F4F0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4534]"
-        aria-controls="mobile-menu"
-        aria-expanded="false"
-        aria-label="Toggle navigation menu"
-      >
-        <!-- Icon Menu Open -->
-        <svg id="icon-menu-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <!-- Icon Menu Close -->
-        <svg id="icon-menu-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-
-    </div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label={`${companyConfig.name} - Home`}>
+      <img src="/brand/moss-ladder-symbol.svg" alt="" width="40" height="40" />
+      <span>{companyConfig.name}</span>
+    </a>
+    <span class="header-description">Independent digital product studio</span>
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul>
+        {primaryNavigation.map((item) => <li><a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
+      </ul>
+      <a href="/products/" class="catalog-link">Explore Catalog</a>
+    </nav>
+    <button id="mobile-menu-toggle" type="button" class="menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation menu">
+      <svg id="icon-menu-open" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-width="1.5" d="M4 8h16M4 16h16" /></svg>
+      <svg id="icon-menu-close" class="hidden" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-width="1.5" d="m6 6 12 12M6 18 18 6" /></svg>
+    </button>
   </div>
-
-  <!-- Mobile Menu Drawer -->
-  <div
-    id="mobile-menu"
-    class="md:hidden hidden border-b border-[#E5E8E3] bg-[#FBFBF9] px-4 pt-3 pb-6 transition-all"
-    aria-label="Mobile Navigation"
-  >
-    <nav class="flex flex-col gap-2">
-      {primaryNavigation.map((item) => {
-        const active = isActive(item.href);
-        return (
-          <a
-            href={item.href}
-            class={`block px-3 py-2.5 rounded-md text-base font-medium ${
-              active 
-                ? 'bg-[#EBF0EC] text-[#1E3022] font-semibold' 
-                : 'text-[#424A44] hover:bg-[#F4F6F2] hover:text-[#121513]'
-            }`}
-            aria-current={active ? 'page' : undefined}
-          >
-            {item.label}
-          </a>
-        );
-      })}
-      <div class="pt-3 mt-2 border-t border-[#E5E8E3]">
-        <a
-          href="/products/"
-          class="flex w-full items-center justify-center text-sm font-medium px-4 py-3 rounded-md bg-[#243428] text-[#F3F7F4] hover:bg-[#314736] transition-colors"
-        >
-          Explore Catalog
-        </a>
-      </div>
+  <div id="mobile-menu" class="mobile-menu hidden" aria-label="Mobile Navigation">
+    <nav class="container">
+      {primaryNavigation.map((item) => <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>)}
+      <a href="/products/" class="text-link">Explore Catalog</a>
     </nav>
   </div>
+  <noscript><nav class="container no-script-nav" aria-label="Navigation without JavaScript">{primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}</nav></noscript>
 </header>
-
 <script>
   function setupMobileNav() {
     const toggleButton = document.getElementById('mobile-menu-toggle');

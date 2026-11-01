@@ -2,120 +2,43 @@
 import type { Product } from '../../types/product';
 import StatusBadge from '../ui/StatusBadge.astro';
 import { getCategoryById } from '../../utils/products';
-
-interface Props {
-  product: Product;
-}
-
+interface Props { product: Product; }
 const { product } = Astro.props;
 const category = getCategoryById(product.categoryId);
 ---
-
-<article 
-  class="group relative flex flex-col justify-between bg-white rounded-xl border border-[#E5E8E3] hover:border-[#CAD2CB] hover:shadow-md transition-all duration-200 p-6 sm:p-7"
-  data-category={product.categoryId}
-  data-status={product.status}
-  data-name={product.name.toLowerCase()}
-  data-description={product.description.toLowerCase()}
-  data-tags={product.tags?.join(' ').toLowerCase() || ''}
->
-  <div>
-    <!-- Top Metadata: Category & Status -->
-    <div class="flex items-center justify-between gap-3 mb-4">
-      {category && (
-        <a 
-          href={`/products/category/${category.slug}/`}
-          class="text-[11px] font-semibold tracking-wider uppercase text-[#5E6D62] hover:text-[#263D2D] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#2E4534] rounded"
-        >
-          {category.name}
-        </a>
-      )}
-      <StatusBadge status={product.status} />
-    </div>
-
-    <!-- Product Icon & Header -->
-    <div class="flex items-start gap-4 mb-3">
-      {product.logoPath ? (
-        <img 
-          src={product.logoPath} 
-          alt={`${product.name} icon`}
-          class="w-11 h-11 rounded-lg shrink-0 border border-[#E5E8E3] p-1 bg-[#F9FAF8]" 
-          width="44" 
-          height="44" 
-          loading="lazy" 
-        />
-      ) : (
-        <div class="w-11 h-11 rounded-lg shrink-0 bg-[#243428] text-white flex items-center justify-center font-bold text-sm font-mono">
-          {product.name.substring(0, 2).toUpperCase()}
-        </div>
-      )}
-
-      <div>
-        <h3 class="text-lg font-bold text-[#131615] group-hover:text-[#284230] transition-colors">
-          <a 
-            href={`/products/${product.slug}/`}
-            class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4534] rounded after:absolute after:inset-0"
-          >
-            {product.name}
-          </a>
-        </h3>
-        {product.status === 'live' && product.websiteUrl && (
-          <span class="text-xs font-mono text-[#526356] inline-block mt-0.5">
-            {product.websiteUrl.replace(/^https?:\/\//, '')}
-          </span>
-        )}
-      </div>
-    </div>
-
-    <!-- Short Description -->
-    <p class="text-sm text-[#4E5851] leading-relaxed mb-5">
-      {product.shortDescription}
-    </p>
-
-    <!-- Key Features / Highlights -->
-    {product.features && product.features.length > 0 && (
-      <ul class="space-y-1.5 mb-6 text-xs text-[#5E6A61] border-t border-[#F0F2EE] pt-4">
-        {product.features.slice(0, 2).map((feat) => (
-          <li class="flex items-start gap-2">
-            <svg class="w-3.5 h-3.5 text-[#3D5E46] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>{feat}</span>
-          </li>
-        ))}
-      </ul>
-    )}
+<article class="product-card" data-category={product.categoryId} data-status={product.status} data-name={product.name.toLowerCase()} data-description={product.description.toLowerCase()} data-tags={product.tags?.join(' ').toLowerCase() || ''}>
+  <div class="product-card-heading">
+    {product.logoPath ? <img src={product.logoPath} alt={`${product.name} icon`} width="48" height="48" /> : <span class="product-initial">{product.name.substring(0, 2).toUpperCase()}</span>}
+    <h3><a href={`/products/${product.slug}/`}>{product.name}</a></h3>
+    <StatusBadge status={product.status} />
   </div>
-
-  <!-- Bottom Action Bar -->
-  <div class="flex items-center justify-between pt-4 border-t border-[#F0F2EE] mt-auto text-xs relative z-10">
-    <a
-      href={`/products/${product.slug}/`}
-      class="font-semibold text-[#294230] hover:text-[#182B1E] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
-    >
-      <span>View Product Specs</span>
-      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
-
-    {product.status === 'live' && product.websiteUrl ? (
-      <a
-        href={product.websiteUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-1 px-3 py-1.5 rounded bg-[#F2F6F3] text-[#294230] hover:bg-[#E3EDE5] font-medium transition-colors border border-[#D5E1D8]"
-        title={`Open ${product.name} website`}
-      >
-        <span>Visit Site</span>
-        <svg class="w-3 h-3 text-[#3D5E46]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
-      </a>
-    ) : (
-      <span class="text-[11px] text-[#78857C] italic">
-        In Planning
-      </span>
-    )}
+  <div class="product-card-copy">
+    <p>{product.shortDescription}</p>
+    {category && <a href={`/products/category/${category.slug}/`} class="product-category">{category.name}</a>}
+    {product.status === 'live' && product.websiteUrl && <span class="product-domain">{product.websiteUrl.replace(/^https?:\/\//, '')}</span>}
+    {product.features && product.features.length > 0 && <ul>{product.features.slice(0, 2).map((feat) => <li>{feat}</li>)}</ul>}
+  </div>
+  <div class="product-card-actions">
+    <a href={`/products/${product.slug}/`} class="text-link">View Product Specs</a>
+    {product.status === 'live' && product.websiteUrl ? <a href={product.websiteUrl} target="_blank" rel="noopener noreferrer" class="text-link" title={`Open ${product.name} website`}>Visit Site</a> : <span>In Planning</span>}
   </div>
 </article>
+<style>
+  /* Hallmark · theme: custom · redesign: full · shape: open product index · genre: editorial · v2.0.0 */
+  /* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V4 · weakest: E, isolated the category and product actions so no overlay can intercept a link */
+  .product-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--gap-columns); padding-block: var(--space-xl); border-top: 1px solid var(--color-rule); align-items: start; }
+  .product-card-heading { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: start; gap: var(--space-sm) var(--space-lg); }
+  .product-card-heading h3 { font-size: var(--text-title); line-height: 1.15; letter-spacing: -0.035em; }
+  .product-card-heading img { flex-shrink: 0; }
+  .product-card-heading :global(.status-badge) { grid-column: 2; justify-self: start; }
+  .product-card-copy { min-width: 0; }
+  .product-card-copy > p { font-size: var(--text-md); line-height: 1.55; }
+  .product-card-copy ul { list-style: none; padding: 0; margin: var(--space-lg) 0 0; display: grid; gap: var(--space-sm); font-size: var(--text-sm); color: var(--color-muted); }
+  .product-category, .product-domain { display: inline-block; margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--color-muted); }
+  .product-domain { display: block; margin-top: var(--space-2xs); }
+  .product-card-actions { display: flex; flex-direction: column; align-items: flex-start; font-size: var(--text-sm); gap: var(--space-xs); }
+  .product-card-actions > span { color: var(--color-muted); min-height: 44px; display: flex; align-items: center; }
+  .product-initial { font-size: var(--text-lg); font-weight: 700; }
+  @media (max-width: 70rem) { .product-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); } .product-card-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; gap: var(--space-lg); } }
+  @media (max-width: 40rem) { .product-card { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); } .product-card-actions { grid-column: 1; } .product-card-heading h3 { grid-column: 1 / -1; grid-row: 2; } .product-card-heading :global(.status-badge) { grid-column: 2; grid-row: 1; align-self: center; } }
+</style>

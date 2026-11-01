@@ -21,10 +21,15 @@ describe('Company Configuration & Brand Standards', () => {
     expect(companyConfig.legal.notice).toContain('financial');
   });
 
-  it('does not link to unverified social handles by default', () => {
+  it('correctly sets verified social handles and active contact mailboxes', () => {
+    expect(companyConfig.social.youtube).toBe('https://youtube.com/@mossladder?si=0_pgeHH-kMOG_wb3');
+    expect(companyConfig.social.instagram).toBe('https://www.instagram.com/moss.ladder?psln=MTZldjhzZzc5bGtsNA==');
+    expect(companyConfig.social.x).toBe('https://x.com/Moss_Ladder');
+    expect(companyConfig.social.linkedin).toContain('moss-ladder');
     expect(companyConfig.social.github).toBeUndefined();
-    expect(companyConfig.social.x).toBeUndefined();
-    expect(companyConfig.social.linkedin).toBeUndefined();
+    expect(companyConfig.contact.primaryEmail).toBe('contact@mossladder.com');
+    expect(companyConfig.contact.supportEmail).toBe('support@mossladder.com');
+    expect(companyConfig.contact.partnershipsEmail).toBe('partnerships@mossladder.com');
   });
 
   it('has valid primary navigation links with trailing slashes', () => {

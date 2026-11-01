@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-// Default to a configurable preview/production URL, fallback to Cloudflare Pages domain
-const siteUrl = process.env.SITE_URL || 'https://moss-ladder.pages.dev';
+// Default to production domain mossladder.com, configurable via SITE_URL environment variable
+const siteUrl = process.env.SITE_URL || 'https://mossladder.com';
 
 export default defineConfig({
   site: siteUrl,

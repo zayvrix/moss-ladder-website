@@ -12,7 +12,7 @@ export const products: Product[] = [
     status: 'live',
     websiteUrl: 'https://rothprorata.com',
     logoPath: '/brand/products/rothprorata-icon.svg',
-    coverImagePath: '/brand/products/rothprorata-preview.svg',
+    coverImagePath: '/brand/products/rothprorata-screen.png',
     featured: true,
     tags: ['Roth IRA', 'Pro-Rata Rule', 'Tax Planning', 'Retirement'],
     launchedAt: '2024-01-15',

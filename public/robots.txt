@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://moss-ladder.pages.dev/sitemap-index.xml
+Sitemap: https://mossladder.com/sitemap-index.xml

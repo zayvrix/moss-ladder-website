@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { companyConfig } from '../config/company';
 import { generateBreadcrumbSchema } from '../utils/seo';
 
 const breadcrumbs = [
@@ -16,158 +17,153 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
   canonicalPath="/about/"
   schema={breadcrumbSchema}
 >
-  
-  <!-- Page Header -->
-  <header class="py-12 md:py-16 border-b border-[#E5E8E3] bg-[#F7F9F7]">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      
-      <!-- Breadcrumb Navigation -->
-      <nav aria-label="Breadcrumb" class="mb-6">
-        <ol class="flex items-center gap-2 text-xs font-mono text-[#6A786F]">
-          <li><a href="/" class="hover:text-[#182B1E] transition-colors">Home</a></li>
-          <li><span class="text-[#A2AEA5]">/</span></li>
-          <li class="text-[#1E3022] font-semibold" aria-current="page">About</li>
+  <header class="page-head about-head">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="about-breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">About</li>
         </ol>
       </nav>
-
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4ECE5] border border-[#CCD7CD] text-xs font-semibold text-[#223828] mb-4">
-        <span>Operating Principles & Narrative</span>
-      </div>
-
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#111412] leading-tight">
-        Building practical software for real decisions.
-      </h1>
-
-      <p class="text-base sm:text-lg text-[#4E5C52] mt-4 max-w-2xl leading-relaxed">
+      <h1>Building practical software for real decisions.</h1>
+      <p class="about-lead">
         Moss Ladder is an independent digital product brand and studio. We develop focused online tools, precise calculators, and clean web applications designed to demystify complex tasks.
       </p>
-
     </div>
   </header>
 
-  <!-- Main Narrative Content -->
-  <article class="py-16 md:py-20">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 space-y-14 text-[#2E3631] text-base leading-relaxed">
-      
-      <!-- Section 1: The Core Idea -->
-      <section class="space-y-4">
-        <h2 class="text-2xl font-bold text-[#131615] tracking-tight">
-          What is Moss Ladder?
-        </h2>
-        <p>
-          The internet is saturated with bloated software suites, intrusive subscription funnels, and pages cluttered with ads. Meanwhile, everyday individuals, financial professionals, and builders face genuine decisions—calculating complex tax thresholds, determining optimal corporate compensation, or navigating multi-tiered government formulas—that require nothing more than clear, accurate, and trustworthy computation.
-        </p>
-        <p>
-          <strong>Moss Ladder</strong> was founded as an independent digital product brand to build those exact tools: fast, purpose-built, and completely unencumbered by unnecessary complexity. The name reflects our design philosophy—measured progression, structural discipline, and patient, sustainable craft.
-        </p>
-      </section>
-
-      <!-- Section 2: Why an Umbrella Model? -->
-      <section class="space-y-4 border-t border-[#EAECE8] pt-10">
-        <h2 class="text-2xl font-bold text-[#131615] tracking-tight">
-          Why an Independent Portfolio Model?
-        </h2>
-        <p>
-          Rather than attempting to force disparate workflows into a single convoluted SaaS platform, Moss Ladder operates on a <strong>modular product philosophy</strong>:
-        </p>
-        <ul class="space-y-3 pl-2 text-sm text-[#404B43]">
-          <li class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#355B3E] shrink-0 mt-2"></span>
-            <div>
-              <strong class="text-[#131615]">Autonomous domain identity:</strong> Each tool lives on its own dedicated domain or namespace (e.g., <a href="https://rothprorata.com" target="_blank" rel="noopener noreferrer" class="text-[#25422D] underline font-medium">rothprorata.com</a>) optimized specifically for its target problem and workflow.
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#355B3E] shrink-0 mt-2"></span>
-            <div>
-              <strong class="text-[#131615]">Zero cross-tool bloat:</strong> A user calculating Backdoor Roth pro-rata ratios does not need to navigate an entire accounting dashboard. They need one accurate, immediate answer.
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#355B3E] shrink-0 mt-2"></span>
-            <div>
-              <strong class="text-[#131615]">Shared architectural standards:</strong> While each product stands independently, all tools share Moss Ladder's strict quality benchmarks—instant load times, strict client-side data privacy, and responsive accessibility.
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <!-- Section 3: Scope Beyond Finance -->
-      <section class="space-y-4 border-t border-[#EAECE8] pt-10">
-        <h2 class="text-2xl font-bold text-[#131615] tracking-tight">
-          From Tax Calculators to Future Digital Tools
-        </h2>
-        <p>
-          Our inaugural products—led by <strong>RothProRata</strong> and upcoming tools like <strong>IRMAA Clarity</strong> and <strong>OptiAMT</strong>—tackle notoriously complicated areas of personal finance and taxation where statutory rules produce counterintuitive results.
-        </p>
-        <p>
-          However, Moss Ladder is fundamentally a <strong>technology and digital product brand</strong>, not solely a tax firm. Our long-term roadmap encompasses developer utilities, educational reference tools, consumer productivity software, and web applications across multiple industries. Any domain characterized by computational friction, dense documentation, or poor existing tooling is within our scope.
-        </p>
-      </section>
-
-      <!-- Section 4: Operational Transparency & Governance -->
-      <section class="space-y-4 border-t border-[#EAECE8] pt-10 bg-[#F7F9F7] p-8 rounded-xl border border-[#DFE5DF]">
-        <h2 class="text-xl font-bold text-[#131615] tracking-tight flex items-center gap-2">
-          <span>Operational Facts & Transparency</span>
-        </h2>
-        <p class="text-sm text-[#4E5B51]">
-          We believe in complete transparency about who we are and how our digital properties are managed:
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono pt-2">
-          <div class="p-3 bg-white rounded border border-[#CCD7CD]">
-            <div class="text-[#6D7D72] uppercase">Operator Model</div>
-            <div class="text-[#18281D] font-bold text-sm mt-0.5">Independent Product Studio</div>
-          </div>
-          <div class="p-3 bg-white rounded border border-[#CCD7CD]">
-            <div class="text-[#6D7D72] uppercase">Funding Model</div>
-            <div class="text-[#18281D] font-bold text-sm mt-0.5">Self-Funded & Autonomous</div>
-          </div>
-          <div class="p-3 bg-white rounded border border-[#CCD7CD]">
-            <div class="text-[#6D7D72] uppercase">Infrastructure</div>
-            <div class="text-[#18281D] font-bold text-sm mt-0.5">Static Edge / Cloudflare Pages</div>
-          </div>
-          <div class="p-3 bg-white rounded border border-[#CCD7CD]">
-            <div class="text-[#6D7D72] uppercase">Data Policy</div>
-            <div class="text-[#18281D] font-bold text-sm mt-0.5">Zero Behavioral Monetization</div>
-          </div>
-        </div>
-        <p class="text-xs text-[#637267] pt-2">
-          * Notice: We do not claim fabricated enterprise registrations, advisory boards, or external investment. Tools operate independently for educational and decision-support purposes without providing formal legal, financial, or tax counsel.
-        </p>
-      </section>
-
-      <!-- Section 5: Looking Ahead -->
-      <section class="space-y-4 border-t border-[#EAECE8] pt-10">
-        <h2 class="text-2xl font-bold text-[#131615] tracking-tight">
-          Looking Ahead
-        </h2>
-        <p>
-          We build with a multi-year horizon. Rather than rushing half-baked software to market, each product under the Moss Ladder brand is researched thoroughly, engineered with modern TypeScript frameworks, tested against edge cases, and maintained with care.
-        </p>
-        <p>
-          If you have a workflow you would like to see simplified, an edge case to report, or an interest in our work, we welcome your direct correspondence.
-        </p>
-      </section>
-
-      <!-- CTA Box -->
-      <div class="pt-8 text-center border-t border-[#EAECE8]">
-        <div class="flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="/products/"
-            class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#243428] text-white text-xs font-semibold hover:bg-[#324737] transition-colors"
-          >
-            Explore the Portfolio
-          </a>
-          <a
-            href="/contact/"
-            class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-[#CDD6CE] bg-white text-xs font-semibold text-[#243428] hover:bg-[#F2F6F3] transition-colors"
-          >
-            Get in Touch
-          </a>
+  <article>
+    <section class="section about-opening">
+      <div class="container about-split">
+        <h2>What is Moss Ladder?</h2>
+        <div class="prose about-copy">
+          <p>
+            The internet is saturated with bloated software suites, intrusive subscription funnels, and pages cluttered with ads. Meanwhile, everyday individuals, financial professionals, and builders face genuine decisions: calculating complex tax thresholds, determining optimal corporate compensation, or navigating multi-tiered government formulas. These require nothing more than clear, accurate, and trustworthy computation.
+          </p>
+          <p>
+            <strong>Moss Ladder</strong> was founded as an independent digital product brand to build those exact tools: fast, purpose-built, and completely unencumbered by unnecessary complexity. The name reflects our design philosophy: measured progression, structural discipline, and patient, sustainable craft.
+          </p>
         </div>
       </div>
+    </section>
 
-    </div>
+    <section class="section about-model">
+      <div class="container">
+        <div class="about-split">
+          <h2>Why an Independent Portfolio Model?</h2>
+          <p class="about-copy">
+            Rather than attempting to force disparate workflows into a single convoluted SaaS platform, Moss Ladder operates on a <strong>modular product philosophy</strong>:
+          </p>
+        </div>
+        <dl class="about-principles">
+          <div>
+            <dt>Autonomous domain identity</dt>
+            <dd>Each tool lives on its own dedicated domain or namespace (e.g., <a href="https://rothprorata.com" target="_blank" rel="noopener noreferrer" class="text-link">rothprorata.com</a>) optimized specifically for its target problem and workflow.</dd>
+          </div>
+          <div>
+            <dt>Zero cross-tool bloat</dt>
+            <dd>A user calculating Backdoor Roth pro-rata ratios does not need to navigate an entire accounting dashboard. They need one accurate, immediate answer.</dd>
+          </div>
+          <div>
+            <dt>Shared architectural standards</dt>
+            <dd>While each product stands independently, all tools share Moss Ladder’s strict quality benchmarks: instant load times, strict client-side data privacy, and responsive accessibility.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container about-scope">
+        <h2>From Tax Calculators to Future Digital Tools</h2>
+        <div class="about-scope-copy">
+          <p>
+            Our inaugural products, led by <strong>RothProRata</strong> and upcoming tools like <strong>IRMAA Clarity</strong> and <strong>OptiAMT</strong>, tackle notoriously complicated areas of personal finance and taxation where statutory rules produce counterintuitive results.
+          </p>
+          <p>
+            However, Moss Ladder is fundamentally a <strong>technology and digital product brand</strong>, not solely a tax firm. Our long-term roadmap encompasses developer utilities, educational reference tools, consumer productivity software, and web applications across multiple industries. Any domain characterized by computational friction, dense documentation, or poor existing tooling is within our scope.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-facts">
+      <div class="container">
+        <div class="about-split">
+          <h2>Operational Facts &amp; Ownership</h2>
+          <p class="about-copy">We believe in complete transparency about who we are, our independent ownership, and how our digital properties are managed:</p>
+        </div>
+        <dl class="about-fact-list">
+          <div><dt>Website &amp; Domain</dt><dd>{companyConfig.provisionalDomain}</dd></div>
+          <div><dt>Brand Operator</dt><dd>{companyConfig.legal.operatorName}</dd></div>
+          <div><dt>Ownership model</dt><dd>Solely Owned &amp; Independent</dd></div>
+          <div><dt>Funding model</dt><dd>Self-Funded &amp; Autonomous</dd></div>
+          <div><dt>Data policy</dt><dd>Zero Behavioral Monetization</dd></div>
+          <div><dt>Primary communications</dt><dd>{companyConfig.contact.primaryEmail}</dd></div>
+        </dl>
+        <p class="about-disclaimer">
+          * Notice: Moss Ladder is an independent digital product brand and studio operated under private stewardship. We do not claim fabricated enterprise registrations, advisory boards, or external venture backing. Tools operate independently for educational and decision-support purposes without providing formal legal, financial, or tax counsel.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container about-split">
+        <h2>Looking Ahead</h2>
+        <div class="prose about-copy">
+          <p>
+            We build with a multi-year horizon. Rather than rushing half-baked software to market, each product under the Moss Ladder brand is researched thoroughly, engineered with modern TypeScript frameworks, tested against edge cases, and maintained with care.
+          </p>
+          <p>
+            If you have a workflow you would like to see simplified, an edge case to report, or an interest in our work, we welcome your direct correspondence.
+          </p>
+          <div class="about-actions">
+            <a href="/products/" class="btn">Explore the Portfolio</a>
+            <a href="/contact/" class="btn btn--quiet">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </article>
-
 </BaseLayout>
+
+<style>
+  /* Hallmark · theme: custom · redesign: full · shape: studio manifesto · genre: editorial · hero: offset statement (/about/) · idea: measured progression · v2.0.0 */
+  /* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V4 · weakest: S, retained the specific portfolio model and operational facts rather than generic studio values */
+  .about-head { padding-block: var(--space-2xl) var(--space-xl); }
+  .about-breadcrumb { margin-bottom: var(--space-xl); font-size: var(--text-sm); }
+  .about-breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin: 0; padding: 0; list-style: none; }
+  .about-breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; }
+  .about-head h1 { max-width: 18ch; font-size: var(--text-display-s); line-height: 1.04; }
+  .about-lead { max-width: 50ch; margin-top: var(--space-xl); margin-left: auto; font-size: var(--text-lead); line-height: 1.5; }
+  .about-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: var(--gap-columns); align-items: start; }
+  h2 { max-width: 20ch; font-size: var(--text-section); line-height: 1.08; }
+  .about-opening { padding-top: var(--space-2xl); }
+  .about-copy { max-width: 65ch; line-height: 1.7; }
+  .about-copy p + p { margin-top: var(--space-lg); }
+  .about-model { background: var(--color-lilac); color: var(--color-ink); }
+  .about-principles { margin: var(--space-2xl) 0 0; }
+  .about-principles > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: var(--gap-columns); padding-block: var(--space-xl); border-top: 1px solid var(--color-muted); }
+  .about-principles dt { font-size: var(--text-title); font-weight: 700; line-height: 1.2; }
+  .about-principles dd { max-width: 65ch; margin: 0; line-height: 1.7; }
+  .about-scope h2 { max-width: 22ch; }
+  .about-scope-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap-columns); margin-top: var(--space-2xl); }
+  .about-scope-copy p { max-width: 65ch; line-height: 1.7; }
+  .about-facts { background: var(--color-paper-3); color: var(--color-ink); }
+  .about-fact-list { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--gap-columns); margin: var(--space-2xl) 0 0; }
+  .about-fact-list > div { padding-block: var(--space-lg); border-top: 1px solid var(--color-muted); }
+  .about-fact-list dt { font-size: var(--text-sm); font-weight: 500; }
+  .about-fact-list dd { margin: var(--space-sm) 0 0; font-size: var(--text-title); line-height: 1.25; font-weight: 700; }
+  .about-disclaimer { max-width: 75ch; margin-top: var(--space-xl); font-size: var(--text-sm); line-height: 1.65; }
+  .about-actions { display: flex; flex-wrap: wrap; gap: var(--space-md); margin-top: var(--space-xl); }
+  @media (max-width: 60rem) {
+    .about-head { padding-block: var(--space-xl) var(--space-2xl); }
+    .about-split, .about-principles > div { grid-template-columns: minmax(0, 1fr); }
+    .about-lead { margin-left: 0; }
+    .about-principles > div { gap: var(--space-lg); }
+  }
+  @media (max-width: 40rem) {
+    .about-scope-copy, .about-fact-list { grid-template-columns: minmax(0, 1fr); }
+    .about-principles, .about-scope-copy, .about-fact-list { margin-top: var(--space-xl); }
+  }
+</style>

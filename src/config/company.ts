@@ -42,26 +42,27 @@ export interface CompanyConfig {
   };
   /** Contact configuration */
   contact: {
-    /** Primary contact email address. Set once configured with DNS/mail host */
+    /** Primary contact email address */
     primaryEmail?: string;
     /** Support alias */
     supportEmail?: string;
     /** Partnerships alias */
     partnershipsEmail?: string;
-    /** Fallback mailto address if domain email is pending */
+    /** Fallback mailto address */
     fallbackEmail: string;
     /** Whether real backend form processing is active */
     hasActiveFormBackend: boolean;
   };
   /**
    * Verified social links only.
-   * Leave empty or undefined until handles are verified and owned.
-   * Never render guessed account URLs.
+   * Handles are verified and owned by Moss Ladder.
    */
   social: {
     github?: string;
     x?: string;
     linkedin?: string;
+    youtube?: string;
+    instagram?: string;
   };
   /** Product footer attribution standard */
   attributionText: string;
@@ -79,28 +80,28 @@ export const companyConfig: CompanyConfig = {
     'Moss Ladder is an independent digital product brand developing practical software, online tools, and thoughtfully designed web experiences.',
   description:
     'Moss Ladder builds independent digital tools and web products that turn complicated tasks into clearer, more practical experiences. Starting with precision financial calculators and expanding into utility software.',
-  siteUrl: envSiteUrl ? envSiteUrl.replace(/\/+$/, '') : 'https://moss-ladder.pages.dev',
+  siteUrl: envSiteUrl ? envSiteUrl.replace(/\/+$/, '') : 'https://mossladder.com',
   provisionalDomain: 'mossladder.com',
   legal: {
     operatorType: 'independent-brand',
     operatorName: 'Moss Ladder Digital Products',
     hasRegisteredEntity: false,
     notice:
-      'Moss Ladder is an independently operated digital product brand and studio. Independent product tools do not provide licensed legal, financial, or tax advice.',
+      'Moss Ladder is an independently owned and operated digital product brand and studio. Independent product tools do not provide licensed legal, financial, or tax advice.',
   },
   contact: {
-    // Leave undefined until mailbox is active on the verified production domain
-    primaryEmail: undefined,
-    supportEmail: undefined,
-    partnershipsEmail: undefined,
+    primaryEmail: 'contact@mossladder.com',
+    supportEmail: 'support@mossladder.com',
+    partnershipsEmail: 'partnerships@mossladder.com',
     fallbackEmail: 'contact@mossladder.com',
     hasActiveFormBackend: false,
   },
   social: {
-    // Only set when accounts are verified and secured
+    youtube: 'https://youtube.com/@mossladder?si=0_pgeHH-kMOG_wb3',
+    instagram: 'https://www.instagram.com/moss.ladder?psln=MTZldjhzZzc5bGtsNA==',
+    x: 'https://x.com/Moss_Ladder',
+    linkedin: 'https://www.linkedin.com/in/moss-ladder-a7136b448?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     github: undefined,
-    x: undefined,
-    linkedin: undefined,
   },
   attributionText: 'A Moss Ladder digital product',
 };

@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# hallmark run logs & artifacts
+.hallmark/
+
 # jetbrains setting folder
 .idea/

@@ -26,6 +26,7 @@ export function formatPageTitle(pageTitle?: string): string {
 }
 
 export function generateOrganizationSchema() {
+  const socialProfiles = Object.values(companyConfig.social).filter(Boolean) as string[];
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -35,6 +36,28 @@ export function generateOrganizationSchema() {
     logo: `${companyConfig.siteUrl}/brand/moss-ladder-symbol.svg`,
     description: companyConfig.description,
     slogan: companyConfig.tagline,
+    email: companyConfig.contact.primaryEmail || companyConfig.contact.fallbackEmail,
+    sameAs: socialProfiles.length > 0 ? socialProfiles : undefined,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: companyConfig.contact.supportEmail || companyConfig.contact.primaryEmail,
+        url: `${companyConfig.siteUrl}/contact/`,
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'partnerships',
+        email: companyConfig.contact.partnershipsEmail || companyConfig.contact.primaryEmail,
+        url: `${companyConfig.siteUrl}/contact/`,
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'general inquiries',
+        email: companyConfig.contact.primaryEmail || companyConfig.contact.fallbackEmail,
+        url: `${companyConfig.siteUrl}/contact/`,
+      },
+    ],
     knowsAbout: [
       'Digital Products',
       'Web Applications',
