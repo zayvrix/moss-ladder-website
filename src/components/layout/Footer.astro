@@ -8,7 +8,7 @@ const hasSocial = Object.values(companyConfig.social).some(Boolean);
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="/" class="brand" aria-label={`${companyConfig.name} home`}><img src="/brand/moss-ladder-symbol.svg" width="40" height="40" alt="" /><span>{companyConfig.name}</span></a>
+        <a href="/" class="brand" aria-label={`${companyConfig.name} home`}><img src="/brand/moss-ladder-symbol.svg?v=2" width="40" height="40" alt="" /><span>{companyConfig.name}</span></a>
         <p>{companyConfig.positioning}</p>
         <p>{companyConfig.tagline}</p>
         {hasSocial && <div class="social-links" aria-label="Official Social Channels">
