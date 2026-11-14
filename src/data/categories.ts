@@ -2,6 +2,10 @@ import type { Category } from '../types/product';
 
 export const categories: Category[] = [
   {
+    id: 'home-living', slug: 'home-living', name: 'Home & Living',
+    description: 'Visual room planning, practical measurement tools, and sizing calculators for the home.',
+  },
+  {
     id: 'finance-tax',
     slug: 'finance-tax',
     name: 'Finance & Tax',

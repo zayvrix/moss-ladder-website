@@ -1,5 +1,7 @@
 # Adding & Managing Portfolio Products
 
+The public portfolio lists live websites only. Keep unreleased ideas outside `src/data/products.ts`; add a product only after verifying its public URL, features, actual logo, and real website screenshot. The examples below describe the data model and do not authorize publishing planned listings.
+
 Moss Ladder is engineered to support 50–100+ digital tools across diverse industries without database dependence. Adding or updating a single typed record in `src/data/products.ts` automatically updates:
 - The searchable & filterable product directory (`/products/`)
 - Dynamic product detail specification pages (`/products/[slug]/`)

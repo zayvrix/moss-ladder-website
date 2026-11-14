@@ -7,38 +7,43 @@ const { product } = Astro.props;
 const category = getCategoryById(product.categoryId);
 ---
 <article class="product-card" data-category={product.categoryId} data-status={product.status} data-name={product.name.toLowerCase()} data-description={product.description.toLowerCase()} data-tags={product.tags?.join(' ').toLowerCase() || ''}>
-  <div class="product-card-heading">
-    {product.logoPath ? <img src={product.logoPath} alt={`${product.name} icon`} width="48" height="48" /> : <span class="product-initial">{product.name.substring(0, 2).toUpperCase()}</span>}
-    <h3><a href={`/products/${product.slug}/`}>{product.name}</a></h3>
-    <StatusBadge status={product.status} />
-  </div>
-  <div class="product-card-copy">
-    <p>{product.shortDescription}</p>
-    {category && <a href={`/products/category/${category.slug}/`} class="product-category">{category.name}</a>}
-    {product.status === 'live' && product.websiteUrl && <span class="product-domain">{product.websiteUrl.replace(/^https?:\/\//, '')}</span>}
-    {product.features && product.features.length > 0 && <ul>{product.features.slice(0, 2).map((feat) => <li>{feat}</li>)}</ul>}
-  </div>
-  <div class="product-card-actions">
-    <a href={`/products/${product.slug}/`} class="text-link">View Product Specs</a>
-    {product.status === 'live' && product.websiteUrl ? <a href={product.websiteUrl} target="_blank" rel="noopener noreferrer" class="text-link" title={`Open ${product.name} website`}>Visit Site</a> : <span>In Planning</span>}
+  {product.coverImagePath && (
+    <a class="product-card-preview" href={`/products/${product.slug}/`} aria-label={`Explore ${product.name}`}>
+      <img src={product.coverImagePath} alt={`Screenshot of the live ${product.name} website`} width={product.coverImageWidth} height={product.coverImageHeight} loading="lazy" />
+    </a>
+  )}
+  <div class="product-card-info">
+    <div class="product-card-heading">
+      {product.logoPath && <img class="product-logo" src={product.logoPath} alt={`${product.name} logo`} width="48" height="48" loading="lazy" />}
+      <h3><a href={`/products/${product.slug}/`}>{product.name}</a></h3>
+      <StatusBadge status={product.status} />
+    </div>
+    <div class="product-card-copy">
+      <p>{product.shortDescription}</p>
+      {category && <a href={`/products/category/${category.slug}/`} class="product-category">{category.name}</a>}
+      {product.websiteUrl && <span class="product-domain">{product.websiteUrl.replace(/^https?:\/\//, '')}</span>}
+      {product.features?.length && <ul>{product.features.slice(0, 2).map((feat) => <li>{feat}</li>)}</ul>}
+    </div>
+    <div class="product-card-actions">
+      {product.websiteUrl && <a href={product.websiteUrl} target="_blank" rel="noopener noreferrer" class="text-link" title={`Open ${product.name} website`}>Visit Website ↗</a>}
+      <a href={`/products/${product.slug}/`} class="text-link">Explore Product</a>
+    </div>
   </div>
 </article>
 <style>
-  /* Hallmark · theme: custom · redesign: full · shape: open product index · genre: editorial · v2.0.0 */
-  /* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V4 · weakest: E, isolated the category and product actions so no overlay can intercept a link */
-  .product-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--gap-columns); padding-block: var(--space-xl); border-top: 1px solid var(--color-rule); align-items: start; }
-  .product-card-heading { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: start; gap: var(--space-sm) var(--space-lg); }
-  .product-card-heading h3 { font-size: var(--text-title); line-height: 1.15; letter-spacing: -0.035em; }
-  .product-card-heading img { flex-shrink: 0; }
-  .product-card-heading :global(.status-badge) { grid-column: 2; justify-self: start; }
-  .product-card-copy { min-width: 0; }
+  .product-card { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap-columns); padding-block: var(--space-xl); border-top: 1px solid var(--color-rule); align-items: center; }
+  .product-card-preview { display: block; min-width: 0; overflow: hidden; border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper-2); }
+  .product-card-preview img { display: block; width: 100%; height: auto; }
+  .product-card-info { min-width: 0; }
+  .product-card-heading { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: var(--space-md); }
+  .product-card-heading h3 { font-size: var(--text-title); line-height: 1.15; letter-spacing: -0.035em; overflow-wrap: break-word; }
+  .product-logo { display: block; width: 48px; height: 48px; object-fit: contain; }
+  .product-card-copy { margin-top: var(--space-lg); }
   .product-card-copy > p { font-size: var(--text-md); line-height: 1.55; }
   .product-card-copy ul { list-style: none; padding: 0; margin: var(--space-lg) 0 0; display: grid; gap: var(--space-sm); font-size: var(--text-sm); color: var(--color-muted); }
   .product-category, .product-domain { display: inline-block; margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--color-muted); }
   .product-domain { display: block; margin-top: var(--space-2xs); }
-  .product-card-actions { display: flex; flex-direction: column; align-items: flex-start; font-size: var(--text-sm); gap: var(--space-xs); }
-  .product-card-actions > span { color: var(--color-muted); min-height: 44px; display: flex; align-items: center; }
-  .product-initial { font-size: var(--text-lg); font-weight: 700; }
-  @media (max-width: 70rem) { .product-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); } .product-card-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; gap: var(--space-lg); } }
-  @media (max-width: 40rem) { .product-card { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); } .product-card-actions { grid-column: 1; } .product-card-heading h3 { grid-column: 1 / -1; grid-row: 2; } .product-card-heading :global(.status-badge) { grid-column: 2; grid-row: 1; align-self: center; } }
+  .product-card-actions { display: flex; flex-wrap: wrap; align-items: center; font-size: var(--text-sm); gap: var(--space-lg); margin-top: var(--space-lg); }
+  @media (max-width: 60rem) { .product-card { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); } }
+  @media (max-width: 40rem) { .product-card-heading { grid-template-columns: 48px minmax(0, 1fr); } .product-card-heading :global(.status-badge) { grid-column: 2; justify-self: start; } }
 </style>

@@ -12,14 +12,14 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 <BaseLayout title="Digital Products Directory" description="Explore Moss Ladder's portfolio of independent digital tools, decision engines, and precision calculators." canonicalPath="/products/" schema={breadcrumbSchema}>
   <header class="page-head directory-head"><div class="container">
     <nav aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Products</li></ol></nav>
-    <div class="directory-title"><h1>Independent Digital Products</h1><div class="directory-counts"><p><strong>{counts.live}</strong> Live</p><p><strong>{counts.planned}</strong> Planned</p></div></div>
-    <p>Search, filter, and inspect our complete catalog of focused web tools and calculation platforms.</p>
+    <div class="directory-title"><h1>Independent Digital Products</h1><div class="directory-counts"><p><strong>{counts.live}</strong> Live</p></div></div>
+    <p>Explore our live websites for home planning, tax calculations, and Medicare premium education.</p>
   </div></header>
   <section class="section directory-section"><div class="container"><ProductCatalog products={products} categories={populatedCategories} /></div></section>
 </BaseLayout>
 <style>
   /* Hallmark · theme: custom · redesign: full · shape: product directory · genre: editorial · hero: editorial record · v2.0.0 */
-  /* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V4 · weakest: S, the live and planned counts are the catalog data rather than decorative metrics */
+  /* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V4 · weakest: S, the live website count comes from the public product catalog */
   .directory-head { background: var(--color-paper-2); color: var(--color-ink); }
   .directory-title { display: flex; align-items: end; justify-content: space-between; gap: var(--gap-columns); }
   .directory-title h1 { text-wrap: balance; min-width: 0; overflow-wrap: break-word; max-width: 17ch; }

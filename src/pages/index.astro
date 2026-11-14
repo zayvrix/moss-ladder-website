@@ -17,7 +17,7 @@ const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
         <p>Independent digital tools that turn complicated tasks into clearer experiences.</p>
         <div class="actions"><a href="/products/" class="btn">Explore Products</a><a href="/about/" class="text-link">About Moss Ladder</a></div>
       </div>
-      <div class="hero-record"><span><strong>{counts.live}</strong> live release</span><span><strong>{counts.planned}</strong> products in pipeline</span><span>Independent operator. No venture debt.</span></div>
+      <div class="hero-record"><span><strong>{counts.live}</strong> live websites</span><span>Finance, retirement, and home planning.</span><span>Independent operator. No venture debt.</span></div>
     </div>
   </section>
   {rothProRata && (
@@ -28,7 +28,7 @@ const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
           <div class="release-links"><StatusBadge status="live" size="md" /><a href={rothProRata.websiteUrl} target="_blank" rel="noopener noreferrer" class="text-link">Launch Tool Website</a><a href={`/products/${rothProRata.slug}/`} class="text-link">View Full Specifications</a></div>
         </div>
         <figure class="release-screen" data-slot="rothprorata-calculator" data-kind="product" data-alt="The live RothProRata calculator showing sample IRA inputs and their conversion breakdown">
-          <img src="/brand/products/rothprorata-screen.png" alt="RothProRata calculator with sample IRA inputs and a taxable versus tax-free conversion breakdown" width="2432" height="2808" loading="lazy" />
+          <img src={rothProRata.coverImagePath} alt="Screenshot of the live RothProRata calculator website" width="1521" height="722" loading="lazy" />
         </figure>
         <div class="release-notes">
           <p>{rothProRata.description}</p>
@@ -39,10 +39,10 @@ const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
   )}
   <section class="section studio-scope">
     <div class="container">
-      <div class="section-heading"><h2>What We Build</h2><p>Moss Ladder is an umbrella brand for independent digital products. Finance and tax first; practical utilities and focused web tools next.</p></div>
+      <div class="section-heading"><h2>What We Build</h2><p>Moss Ladder is an umbrella brand for independent digital products. Live tools for tax decisions, Medicare premium planning, and room measurements.</p></div>
       <dl class="scope-list">
-        <div><dt>Decision &amp; Planning Engines</dt><dd>RothProRata and IRMAA Clarity turn opaque statutory formulas and IRS regulations into deterministic, visual calculation models.</dd></div>
-        <div><dt>Focused Utility Software</dt><dd>Lightweight, high-speed, single-purpose web utilities for specific operational workflows, without onboarding friction or recurring fees.</dd></div>
+        <div><dt>Decision &amp; Planning Engines</dt><dd>RothProRata and IRMAA Command Center make tax and Medicare premium calculations easier to inspect and understand.</dd></div>
+        <div><dt>Visual Home Planning</dt><dd>RoomScaleLab brings room measurements, furniture fit checks, rug comparisons, and curtain sizing into practical visual tools.</dd></div>
         <div><dt>Educational Reference Models</dt><dd>Structured reference websites that demystify complex rules, thresholds, and administrative criteria with clear scenario comparisons.</dd></div>
       </dl>
     </div>
@@ -60,8 +60,8 @@ const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
   </section>
   <section class="section selected-products">
     <div class="container">
-      <div class="section-heading"><h2>Selected Products &amp; Pipeline</h2><a href="/products/" class="text-link">View all {allProducts.length} products</a></div>
-      <p class="selected-intro">Browse live software and planned products.</p>
+      <div class="section-heading"><h2>Live Websites</h2><a href="/products/" class="text-link">View all {allProducts.length} products</a></div>
+      <p class="selected-intro">Explore the websites we operate, with real screenshots and direct links to each product.</p>
       <div class="product-list">{featuredProducts.map((product) => <ProductCard product={product} />)}</div>
       <a href="/products/" class="text-link directory-link">Browse Entire Product Directory</a>
     </div>
@@ -69,7 +69,7 @@ const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
   <section class="section studio-contact">
     <div class="container contact-composition">
       <h2>Have questions or product feedback?</h2>
-      <div><p>Using RothProRata, tracking upcoming planning tools, or interested in partnerships? We welcome your direct communication.</p><div class="actions"><a href="/contact/" class="btn">Contact Support</a><a href="/about/" class="text-link">Read Our Story</a></div></div>
+      <div><p>Using one of our tools, sharing product feedback, or interested in partnerships? We welcome your direct communication.</p><div class="actions"><a href="/contact/" class="btn">Contact Support</a><a href="/about/" class="text-link">Read Our Story</a></div></div>
     </div>
   </section>
 </BaseLayout>
@@ -82,8 +82,8 @@ const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
   .release-heading h2 { font-size: var(--text-display-s); }
   .release-heading p { font-size: var(--text-lead); margin-top: var(--space-md); max-width: 34ch; }
   .release-links { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: var(--space-lg); }
-  .release-screen { aspect-ratio: 1.8; min-height: 300px; margin: 0; border-radius: var(--radius-card); }
-  .release-screen > img { object-position: top; }
+  .release-screen { aspect-ratio: 1521 / 722; min-height: 0; margin: 0; border-radius: var(--radius-card); }
+  .release-screen > img { object-position: top; object-fit: contain; }
   .release-notes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap-columns); margin-top: var(--space-xl); color: var(--color-field-muted); }
   .release-notes p { max-width: 65ch; }
   .release-notes ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-md); font-size: var(--text-sm); }
@@ -104,12 +104,12 @@ const rothProRata = allProducts.find((p) => p.slug === 'rothprorata');
   .contact-composition h2 { max-width: 16ch; font-size: var(--text-display-s); }
   .contact-composition p { max-width: 46ch; font-size: var(--text-lead); }
   .contact-composition .actions { margin-top: var(--space-xl); }
-  @media (max-width: 60rem) { .release-heading { align-items: start; flex-direction: column; } .release-links { justify-content: start; } .release-screen { aspect-ratio: 1.2; } }
+  @media (max-width: 60rem) { .release-heading { align-items: start; flex-direction: column; } .release-links { justify-content: start; } .release-screen { aspect-ratio: 1521 / 722; } }
   @media (max-width: 40rem) {
     .release-notes, .scope-list > div, .principles-list, .contact-composition { grid-template-columns: minmax(0, 1fr); }
     .scope-list > div { gap: var(--space-lg); }
-    .release-screen { aspect-ratio: 0.95; min-height: 0; }
-    .release-screen > img { width: 200%; max-width: none; left: auto; right: 0; object-fit: cover; object-position: top; }
+    .release-screen { aspect-ratio: 1521 / 722; min-height: 0; }
+    .release-screen > img { width: 100%; object-fit: contain; object-position: top; }
     .release-notes { margin-top: var(--space-xl); }
     .principles-list { gap: var(--space-xl); }
     .studio-contact { padding-top: 0; }

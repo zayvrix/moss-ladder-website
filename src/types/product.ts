@@ -11,6 +11,8 @@ export interface Product {
   websiteUrl?: string;
   logoPath?: string;
   coverImagePath?: string;
+  coverImageWidth?: number;
+  coverImageHeight?: number;
   featured: boolean;
   tags?: string[];
   launchedAt?: string;

@@ -41,9 +41,7 @@ describe('Production Build Output Verification', () => {
     const productRoutes = [
       'products/rothprorata/index.html',
       'products/irmaa-clarity/index.html',
-      'products/optiamt/index.html',
-      'products/supplemental-wage-tax-calculator/index.html',
-      'products/scorp-reasonable-salary/index.html',
+      'products/roomscalelab/index.html',
     ];
 
     for (const route of productRoutes) {
@@ -56,6 +54,10 @@ describe('Production Build Output Verification', () => {
     const populatedRoute = path.join(distDir, 'products/category/finance-tax/index.html');
     expect(fs.existsSync(populatedRoute)).toBe(true);
 
+    expect(fs.existsSync(path.join(distDir, 'products/category/home-living/index.html'))).toBe(true);
+    for (const slug of ['optiamt', 'supplemental-wage-tax-calculator', 'scorp-reasonable-salary']) {
+      expect(fs.existsSync(path.join(distDir, `products/${slug}/index.html`))).toBe(false);
+    }
     const emptyRoute = path.join(distDir, 'products/category/productivity/index.html');
     expect(fs.existsSync(emptyRoute)).toBe(false);
   });

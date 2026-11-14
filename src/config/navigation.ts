@@ -13,7 +13,9 @@ export const primaryNavigation: NavItem[] = [
 export const footerNavigation = {
   products: [
     { label: 'All Products', href: '/products/' },
-    { label: 'RothProRata (Live)', href: '/products/rothprorata/' },
+    { label: 'RoomScaleLab', href: '/products/roomscalelab/' },
+    { label: 'RothProRata', href: '/products/rothprorata/' },
+    { label: 'IRMAA Command Center', href: '/products/irmaa-clarity/' },
     { label: 'Finance & Tax Tools', href: '/products/category/finance-tax/' },
   ],
   company: [

@@ -63,13 +63,13 @@ describe('SEO & Structured Data Helpers', () => {
     expect((schema as any).offers?.price).toBe('0');
   });
 
-  it('generates SoftwareApplication schema without live link for planned products', () => {
+  it('generates SoftwareApplication schema with the live IRMAA website link', () => {
     const irmaa = getProductBySlug('irmaa-clarity')!;
     const schema = generateProductSchema(irmaa);
 
     expect(schema['@type']).toBe('SoftwareApplication');
-    expect(schema.name).toBe('IRMAA Clarity');
-    expect(schema.sameAs).toBeUndefined();
-    expect((schema as any).offers).toBeUndefined();
+    expect(schema.name).toBe('IRMAA Command Center');
+    expect(schema.sameAs).toBe('https://irmaaclarity.com');
+    expect((schema as any).offers?.price).toBe('0');
   });
 });

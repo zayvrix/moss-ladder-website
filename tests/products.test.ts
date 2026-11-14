@@ -14,7 +14,7 @@ describe('Product Catalog & Data Models', () => {
   const products = getAllProducts();
 
   it('contains initial products with complete required fields', () => {
-    expect(products.length).toBeGreaterThanOrEqual(5);
+    expect(products.length).toBe(3);
 
     for (const p of products) {
       expect(p.id).toBeTruthy();
@@ -39,13 +39,17 @@ describe('Product Catalog & Data Models', () => {
     expect(rpr?.features?.length).toBeGreaterThan(0);
   });
 
-  it('correctly models planned products without fake URLs', () => {
-    const plannedSlugs = ['irmaa-clarity', 'optiamt', 'supplemental-wage-tax-calculator', 'scorp-reasonable-salary'];
-    for (const slug of plannedSlugs) {
-      const p = getProductBySlug(slug);
-      expect(p).toBeDefined();
-      expect(p?.status).toBe('planned');
-      expect(p?.websiteUrl).toBeUndefined();
+  it('publishes only live websites, including RoomScaleLab and IRMAA', () => {
+    expect(getProductBySlug('roomscalelab')?.websiteUrl).toBe('https://roomscalelab.com');
+    expect(getProductBySlug('irmaa-clarity')?.websiteUrl).toBe('https://irmaaclarity.com');
+    for (const product of products) {
+      expect(product.status).toBe('live');
+      expect(product.websiteUrl).toMatch(/^https:\/\//);
+      expect(product.logoPath).toBeTruthy();
+      expect(product.coverImagePath).toBeTruthy();
+    }
+    for (const slug of ['optiamt', 'supplemental-wage-tax-calculator', 'scorp-reasonable-salary']) {
+      expect(getProductBySlug(slug)).toBeUndefined();
     }
   });
 
@@ -67,8 +71,8 @@ describe('Product Catalog & Data Models', () => {
   it('computes accurate product counts', () => {
     const counts = getProductCounts();
     expect(counts.total).toBe(products.length);
-    expect(counts.live).toBe(1); // RothProRata
-    expect(counts.planned).toBe(4);
+    expect(counts.live).toBe(3);
+    expect(counts.planned).toBe(0);
     expect(counts.inDevelopment).toBe(0);
   });
 
