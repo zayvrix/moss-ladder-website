@@ -27,7 +27,7 @@ export const products: Product[] = [
     shortDescription: 'Interactive Backdoor Roth IRA pro-rata calculator and Form 8606 scenario modeler.',
     description: 'RothProRata is an educational calculator for the IRS pro-rata rule on Backdoor Roth IRA conversions. It models the taxable and tax-free portions of a conversion using IRA balances and nondeductible basis, with explanations of the calculation and Form 8606.',
     categoryId: 'finance-tax', status: 'live', websiteUrl: 'https://rothprorata.com',
-    logoPath: '/brand/products/rothprorata-logo.jpg',
+    logoPath: '/brand/products/rothprorata-logo.svg',
     coverImagePath: '/brand/products/rothprorata-screen.jpg',
     coverImageWidth: 1536, coverImageHeight: 730,
     featured: true,
